@@ -8,7 +8,7 @@ namespace FoodAPI.Repository.Interface
         Task<UserModel> FindById(int id);
         Task<UserModel> FindByEmail(string email);
         Task<UserModel> AddUser(UserModel user);
-        Task<UserModel> UpdateUser(UserModel user);
+        Task<UserModel> UpdateUser(UserModel user, int id);
         Task<bool> DeleteUser(int id);
         Task<bool> Login(string email, string password);
     }

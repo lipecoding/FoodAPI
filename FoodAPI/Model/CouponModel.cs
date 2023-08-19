@@ -2,13 +2,14 @@
 
 namespace FoodAPI.Model
 {
-    public class CompanyCouponModel
+    public class CouponModel
     {
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int? ItemID { get; set; }
+        public virtual MenuModel? Menu { get; set; }
         public int Value { get; set; }
         public VTypeEnum V_Type { get; set; }
         public CompanyTypeEnum Categorie { get; set; }
@@ -16,5 +17,6 @@ namespace FoodAPI.Model
         public virtual UserModel? User { get; set; }
         public int CompanyID { get; set;}
         public virtual CompanyModel Company { get; set; }
+        public PremiumEnum Premium { get; set; }
     }
 }
