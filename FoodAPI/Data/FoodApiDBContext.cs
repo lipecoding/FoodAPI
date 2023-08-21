@@ -9,8 +9,10 @@ namespace FoodAPI.Data
         public FoodApiDBContext(DbContextOptions<FoodApiDBContext> options) : base(options) { }
 
         public DbSet<AdressModel> Adresses { get; set; }
-        public DbSet<CouponModel> CompanyCoupon { get; set; }
-        public DbSet<CompanyModel> CompanyModel { get; set; }
+        public DbSet<CouponModel> Coupon { get; set; }
+        public DbSet<CouponUserRelModel> CouponUserRel { get; set; }
+        public DbSet<CouponCompanyRelModel> CouponCompanyRel { get; set; }
+        public DbSet<CompanyModel> Company { get; set; }
         public DbSet<MenuModel> Menu { get; set; }
         public DbSet<UserModel> User { get; set; }
 
@@ -18,6 +20,8 @@ namespace FoodAPI.Data
         {
             modelBuilder.ApplyConfiguration(new AdressMap());
             modelBuilder.ApplyConfiguration(new CouponMap());
+            modelBuilder.ApplyConfiguration(new CouponCompanyRelMap());
+            modelBuilder.ApplyConfiguration(new CouponUserRelMap());
             modelBuilder.ApplyConfiguration(new CompanyMap());
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new MenuMap());

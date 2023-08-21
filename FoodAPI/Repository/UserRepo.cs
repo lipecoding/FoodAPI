@@ -26,10 +26,8 @@ namespace FoodAPI.Repository
         {
             UserModel user = await FindById(id);
 
-            if (user == null)
-            {
-                throw new Exception($"USER ID: {id} Unknown!");
-            }
+            _dbContext.User.Remove(user);
+            await _dbContext.SaveChangesAsync();
 
             return true;
 
@@ -47,22 +45,31 @@ namespace FoodAPI.Repository
 
         public async Task<UserModel> FindById(int id)
         {
-            return await _dbContext.User.FirstOrDefaultAsync(x => x.Id == id);
+            UserModel user = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (user == null)
+            {
+                throw new Exception($"USER ID: {id} Unknown!");
+            }
+
+            return user;
         }
 
-        public Task<bool> Login(string email, string password)
+        public async Task<bool> Login(string email, string password)
         {
-            throw new NotImplementedException();
+            UserModel user = await _dbContext.User.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
+
+            if (user == null)
+            {
+                return false;
+            }
+            return true;
         }
 
         public async Task<UserModel> UpdateUser(UserModel user, int id)
         {
             UserModel userM = await FindById(id);
 
-            if (userM == null)
-            {
-                throw new Exception($"USER ID: {id} Unknown!");
-            }
             userM.Name = user.Name;
             userM.Email = user.Email;
             userM.Password = user.Password; 
