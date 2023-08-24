@@ -70,6 +70,8 @@ namespace FoodAPI.Repository
 
         public async Task<MenuModel> UpdateItem(MenuModel model, int id)
         {
+            await FindItemByID(id);
+
             model.Id = id;
 
             _dbContext.Menu.Update(model);

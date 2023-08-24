@@ -4,7 +4,7 @@ using FoodAPI.Model;
 using FoodAPI.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
-using static Azure.Core.HttpHeader;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FoodAPI.Repository
 {
@@ -19,9 +19,15 @@ namespace FoodAPI.Repository
 
         public async Task<CouponModel> AddCoupon(CouponModel coupon)
         {
-            await _dbContext.Coupon.AddAsync(coupon);
-            await _dbContext.SaveChangesAsync();
-
+            if (!_dbContext.Coupon.FirstOrDefault(x => x.Code == coupon.Code).ToString().IsNullOrEmpty())
+            {
+                throw new Exception("Coupon with this code already exists");
+            }
+            else
+            {
+                await _dbContext.Coupon.AddAsync(coupon);
+                await _dbContext.SaveChangesAsync();
+            }
             return coupon;
         }
         
@@ -91,7 +97,10 @@ namespace FoodAPI.Repository
 
         public async Task<CouponModel> UpdateCoupon(CouponModel coupon, int id)
         {
+            await FindById(id);
+
             coupon.Id = id;
+            coupon.Code = !_dbContext.Coupon.FirstOrDefault(x => x.Code == coupon.Code).ToString().IsNullOrEmpty() ? _dbContext.Coupon.FirstOrDefault(x => x.Id == id).Code : coupon.Code;
 
             _dbContext.Coupon.Update(coupon);
             await _dbContext.SaveChangesAsync();

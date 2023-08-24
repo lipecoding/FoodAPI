@@ -2,6 +2,7 @@
 using FoodAPI.Model;
 using FoodAPI.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FoodAPI.Repository
 {
@@ -13,15 +14,26 @@ namespace FoodAPI.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<CompanyModel> AddComapany(CompanyModel company)
+        public async Task<CompanyModel> AddCompany(CompanyModel company)
         {
-            await _dbContext.Company.AddAsync(company);
-            await _dbContext.SaveChangesAsync();
+            if (!_dbContext.Company.FirstOrDefault(x => x.Email == company.Email).ToString().IsNullOrEmpty())
+            {
+                throw new Exception("Company With this email already exists");
+            }
+            else if (!_dbContext.Company.FirstOrDefault(x => x.CNPJ == company.CNPJ).ToString().IsNullOrEmpty())
+            {
+                throw new Exception("Company With this CNPJ already exists");
+            }
+            else
+            {
+                await _dbContext.Company.AddAsync(company);
+                await _dbContext.SaveChangesAsync();
+            }
 
             return company;
         }
 
-        public async Task<bool> DeleteComapany(int id)
+        public async Task<bool> DeleteCompany(int id)
         {
             CompanyModel company = await FindById(id);
 
@@ -31,7 +43,7 @@ namespace FoodAPI.Repository
             return true;
         }
 
-        public async Task<List<CompanyModel>> FindAllComapanys()
+        public async Task<List<CompanyModel>> FindAllCompanys()
         {
             return await _dbContext.Company.ToListAsync();
         }
@@ -69,16 +81,15 @@ namespace FoodAPI.Repository
             return true;
         }
 
-        public async Task<CompanyModel> UpdateComapany(CompanyModel company, int id)
+        public async Task<CompanyModel> UpdateCompany(CompanyModel company, int id)
         {
             CompanyModel companyM = await _dbContext.Company.FirstOrDefaultAsync(x => x.Id == id);
 
             companyM.Type = company.Type;
-            companyM.CNPJ = company.CNPJ;
             companyM.Description = company.Description;
             companyM.Password = company.Password;
             companyM.Name = company.Name;
-            companyM.Email = company.Email;
+            companyM.Email = !_dbContext.Company.FirstOrDefault(x => x.Email == company.Email).ToString().IsNullOrEmpty() ? companyM.Email : company.Email;
             companyM.Plan = company.Plan;
 
             await _dbContext.SaveChangesAsync();

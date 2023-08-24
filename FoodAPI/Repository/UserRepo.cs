@@ -2,6 +2,7 @@
 using FoodAPI.Model;
 using FoodAPI.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FoodAPI.Repository
 {
@@ -16,8 +17,23 @@ namespace FoodAPI.Repository
 
         public async Task<UserModel> AddUser(UserModel user)
         {
-            await _dbContext.User.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
+            if(!_dbContext.User.FirstOrDefault(x => x.Email == user.Email).ToString().IsNullOrEmpty())
+            {
+                throw new Exception("User With this email already exists");
+            }
+            else if(!_dbContext.User.FirstOrDefault(x => x.CPF == user.CPF).ToString().IsNullOrEmpty())
+            {
+                throw new Exception("User With this CPF already exists");
+            }
+            else if (!_dbContext.User.FirstOrDefault(x => x.PhoneNumber == user.PhoneNumber).ToString().IsNullOrEmpty())
+            {
+                throw new Exception("User With this phoneNumber already exists");
+            }
+            else
+            {
+                await _dbContext.User.AddAsync(user);
+                await _dbContext.SaveChangesAsync();
+            }
 
             return user;
         }
@@ -30,7 +46,6 @@ namespace FoodAPI.Repository
             await _dbContext.SaveChangesAsync();
 
             return true;
-
         }
 
         public async Task<List<UserModel>> FindAllUsers()
@@ -40,7 +55,13 @@ namespace FoodAPI.Repository
 
         public async Task<UserModel> FindByEmail(string email)
         {
-            return await _dbContext.User.FirstOrDefaultAsync(x => x.Email == email);
+            UserModel user = await _dbContext.User.FirstOrDefaultAsync(x => x.Email == email);
+
+            if (user == null)
+            {
+                throw new Exception($"USER EMAIL: {email} Unknown!");
+            }
+            return user;
         }
 
         public async Task<UserModel> FindById(int id)
@@ -71,11 +92,10 @@ namespace FoodAPI.Repository
             UserModel userM = await FindById(id);
 
             userM.Name = user.Name;
-            userM.Email = user.Email;
+            userM.Email = !_dbContext.User.FirstOrDefault(x => x.Email == user.Email).ToString().IsNullOrEmpty() ? userM.Email : user.Email;
             userM.Password = user.Password; 
             userM.Age = user.Age;
-            userM.CPF = user.CPF;
-            userM.PhoneNumber = user.PhoneNumber;
+            userM.PhoneNumber = !_dbContext.User.FirstOrDefault(x => x.PhoneNumber == user.PhoneNumber).ToString().IsNullOrEmpty() ? userM.PhoneNumber : user.PhoneNumber;
             userM.Premium = user.Premium;
 
             _dbContext.Update(userM);

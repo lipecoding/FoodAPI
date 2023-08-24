@@ -16,24 +16,24 @@ namespace FoodAPI.Controllers
             _companyRepo = companyRepo;
         }
 
-        [HttpPost("AddComapany")]
-        public async Task<ActionResult<CompanyModel>> AddComapany(CompanyModel company)
+        [HttpPost("AddCompany")]
+        public async Task<ActionResult<CompanyModel>> AddCompany(CompanyModel company)
         {
-            await _companyRepo.AddComapany(company);
+            await _companyRepo.AddCompany(company);
 
             return Ok(company);
         }
-        [HttpDelete("DeleteComapany/{id}")]
-        public async Task<ActionResult<bool>> DeleteComapany(int id)
+        [HttpDelete("DeleteCompany/{id}")]
+        public async Task<ActionResult<bool>> DeleteCompany(int id)
         {
-            bool del = await _companyRepo.DeleteComapany(id);
+            bool del = await _companyRepo.DeleteCompany(id);
 
             return Ok(del);
         }
-        [HttpGet("FindAllComapanys")]
-        public async Task<ActionResult<List<CompanyModel>>> FindAllComapanys()
+        [HttpGet("FindAllCompanys")]
+        public async Task<ActionResult<List<CompanyModel>>> FindAllCompanys()
         {
-            List<CompanyModel> companys = await _companyRepo.FindAllComapanys();
+            List<CompanyModel> companys = await _companyRepo.FindAllCompanys();
 
             return Ok(companys);
         }
@@ -58,10 +58,10 @@ namespace FoodAPI.Controllers
 
             return Ok(login);
         }
-        [HttpPut("UpdateComapany")]
-        public async Task<ActionResult<CompanyModel>> UpdateComapany(CompanyModel company, int id)
+        [HttpPut("UpdateCompany")]
+        public async Task<ActionResult<CompanyModel>> UpdateCompany(CompanyModel company, int id)
         {
-            CompanyModel companyM = await _companyRepo.UpdateComapany(company, id);
+            CompanyModel companyM = await _companyRepo.UpdateCompany(company, id);
 
             return Ok(companyM);
         }
