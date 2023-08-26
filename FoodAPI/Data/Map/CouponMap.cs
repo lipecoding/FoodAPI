@@ -19,6 +19,8 @@ namespace FoodAPI.Data.Map
             builder.HasOne(x => x.Menu);
             builder.HasOne(x => x.UserRel);
             builder.HasOne(x => x.CompanyRel);
+
+            builder.Ignore(x => x.Error);
         }
         
     }

@@ -5,7 +5,7 @@
 namespace FoodAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,6 +27,30 @@ namespace FoodAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Company", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Deliverer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    CNH = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    CPF = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    Age = table.Column<int>(type: "int", maxLength: 3, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CEP = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    AdressNumber = table.Column<int>(type: "int", maxLength: 6, nullable: false),
+                    Complement = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Status = table.Column<int>(type: "int", maxLength: 1, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Deliverer", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,6 +107,7 @@ namespace FoodAPI.Migrations
                     CEP = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Street = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     AdressNumber = table.Column<int>(type: "int", maxLength: 6, nullable: false),
+                    Complement = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReceiverName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -130,7 +155,8 @@ namespace FoodAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CouponId = table.Column<int>(type: "int", nullable: false),
-                    CompanyId = table.Column<int>(type: "int", nullable: false)
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
+                    Error = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -224,6 +250,9 @@ namespace FoodAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "CouponUserRel");
+
+            migrationBuilder.DropTable(
+                name: "Deliverer");
 
             migrationBuilder.DropTable(
                 name: "Coupon");

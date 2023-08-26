@@ -20,6 +20,8 @@ namespace FoodAPI.Data.Map
             builder.Property(x => x.AdressNumber).IsRequired().HasMaxLength(6);
             builder.Property(x => x.Complement).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Status).IsRequired().HasMaxLength(1);
+
+            builder.Ignore(x => x.Error);
         }
     }
 }
