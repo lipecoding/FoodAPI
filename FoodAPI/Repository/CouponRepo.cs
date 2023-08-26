@@ -1,4 +1,5 @@
 ﻿using FoodAPI.Data;
+using FoodAPI.Data.Map;
 using FoodAPI.ENUM;
 using FoodAPI.Model;
 using FoodAPI.Repository.Interface;
@@ -19,9 +20,9 @@ namespace FoodAPI.Repository
 
         public async Task<CouponModel> AddCoupon(CouponModel coupon)
         {
-            if (!_dbContext.Coupon.FirstOrDefault(x => x.Code == coupon.Code).ToString().IsNullOrEmpty())
+            if (_dbContext.Coupon.Where(x => x.Code == coupon.Code).Any())
             {
-                throw new Exception("Coupon with this code already exists");
+                coupon.Error = "Coupon with this code already exists";
             }
             else
             {
@@ -97,17 +98,20 @@ namespace FoodAPI.Repository
 
         public async Task<CouponModel> UpdateCoupon(CouponModel coupon, int id)
         {
-            await FindById(id);
+            CouponModel couponM = await FindById(id);
 
             coupon.Id = id;
-            coupon.Code = !_dbContext.Coupon.FirstOrDefault(x => x.Code == coupon.Code).ToString().IsNullOrEmpty() ? _dbContext.Coupon.FirstOrDefault(x => x.Id == id).Code : coupon.Code;
+            if(_dbContext.Coupon.Where(x => x.Code == coupon.Code).Any())
+            {
+                coupon.Code = couponM.Code;
+                coupon.Error = "Coupon with this code already exists";
+            }
+
 
             _dbContext.Coupon.Update(coupon);
             await _dbContext.SaveChangesAsync();
 
             return coupon;
-
-
         }
     }
 }

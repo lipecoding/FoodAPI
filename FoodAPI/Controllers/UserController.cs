@@ -1,6 +1,7 @@
 ﻿using FoodAPI.Model;
 using FoodAPI.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FoodAPI.Controllers
 {
@@ -54,9 +55,12 @@ namespace FoodAPI.Controllers
         [HttpPost("AddUser")]
         public async Task<ActionResult<UserModel>> AddUser(UserModel user)
         {
-            await _userRepo.AddUser(user);
+            UserModel userM = await _userRepo.AddUser(user);
+            if(userM.Error.IsNullOrEmpty())
+                return Ok(userM);
+            else
+                return BadRequest(userM.Error);
 
-            return Ok(user);
         }
         [HttpDelete("DeleteUser/{id}")]
         public async Task<ActionResult<bool>> DeleteUser(int id)

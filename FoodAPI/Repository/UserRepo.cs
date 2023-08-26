@@ -17,19 +17,22 @@ namespace FoodAPI.Repository
 
         public async Task<UserModel> AddUser(UserModel user)
         {
-            if(!_dbContext.User.FirstOrDefault(x => x.Email == user.Email).ToString().IsNullOrEmpty())
+            if (_dbContext.User.Where(x => x.Email == user.Email).Any())
             {
-                throw new Exception("User With this email already exists");
+                user.Error = "User With this email already exists";
             }
-            else if(!_dbContext.User.FirstOrDefault(x => x.CPF == user.CPF).ToString().IsNullOrEmpty())
+
+            if (_dbContext.User.Where(x => x.CPF == user.CPF).Any())
             {
-                throw new Exception("User With this CPF already exists");
+                user.Error = "User With this CPF already exists";
             }
-            else if (!_dbContext.User.FirstOrDefault(x => x.PhoneNumber == user.PhoneNumber).ToString().IsNullOrEmpty())
+
+            if (_dbContext.User.Where(x => x.PhoneNumber == user.PhoneNumber).Any())
             {
-                throw new Exception("User With this phoneNumber already exists");
+                user.Error = "User With this phoneNumber already exists";
             }
-            else
+
+            if (user.Error.IsNullOrEmpty())
             {
                 await _dbContext.User.AddAsync(user);
                 await _dbContext.SaveChangesAsync();
@@ -92,14 +95,29 @@ namespace FoodAPI.Repository
             UserModel userM = await FindById(id);
 
             userM.Name = user.Name;
-            userM.Email = !_dbContext.User.FirstOrDefault(x => x.Email == user.Email).ToString().IsNullOrEmpty() ? userM.Email : user.Email;
+
+            if (_dbContext.User.Where(x => x.Email == user.Email).Any())
+                userM.Error = "This Email is already in use.";
+            else
+                userM.Email = user.Email;
+
             userM.Password = user.Password; 
             userM.Age = user.Age;
-            userM.PhoneNumber = !_dbContext.User.FirstOrDefault(x => x.PhoneNumber == user.PhoneNumber).ToString().IsNullOrEmpty() ? userM.PhoneNumber : user.PhoneNumber;
+
+            if (_dbContext.User.Where(x => x.PhoneNumber == user.PhoneNumber).Any())
+            {
+                if (!userM.Error.IsNullOrEmpty())
+                    userM.Error += "\n";
+
+                userM.Error += "This PhoneNumber is already in use.";
+            }
+            else
+                userM.PhoneNumber = user.PhoneNumber;
+
             userM.Premium = user.Premium;
 
             _dbContext.Update(userM);
-            _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
 
             return userM;
 

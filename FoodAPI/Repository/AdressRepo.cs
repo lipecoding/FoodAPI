@@ -2,8 +2,6 @@
 using FoodAPI.Model;
 using FoodAPI.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace FoodAPI.Repository
 {

@@ -12,5 +12,6 @@ namespace FoodAPI.Model
         public string CNPJ { get; set; }
         public CompanyTypeEnum Type { get; set; }
         public CompanyPlanEnum Plan { get; set; }
+        public string Error { get; set; }
     }
 }

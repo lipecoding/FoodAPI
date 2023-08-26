@@ -2,6 +2,7 @@
 using FoodAPI.Repository;
 using FoodAPI.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FoodAPI.Controllers
 {
@@ -19,9 +20,12 @@ namespace FoodAPI.Controllers
         [HttpPost("AddCompany")]
         public async Task<ActionResult<CompanyModel>> AddCompany(CompanyModel company)
         {
-            await _companyRepo.AddCompany(company);
+            CompanyModel companyM = await _companyRepo.AddCompany(company);
 
-            return Ok(company);
+            if(companyM.Error.IsNullOrEmpty())
+                return Ok(companyM);
+            else
+                return BadRequest(companyM.Error);
         }
         [HttpDelete("DeleteCompany/{id}")]
         public async Task<ActionResult<bool>> DeleteCompany(int id)

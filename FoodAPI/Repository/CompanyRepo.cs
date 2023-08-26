@@ -16,15 +16,20 @@ namespace FoodAPI.Repository
         }
         public async Task<CompanyModel> AddCompany(CompanyModel company)
         {
-            if (!_dbContext.Company.FirstOrDefault(x => x.Email == company.Email).ToString().IsNullOrEmpty())
+            if (_dbContext.Company.Where(x => x.Email == company.Email).Any())
             {
-                throw new Exception("Company With this email already exists");
+                company.Error = "Company With this email already exists";
             }
-            else if (!_dbContext.Company.FirstOrDefault(x => x.CNPJ == company.CNPJ).ToString().IsNullOrEmpty())
+
+            if (_dbContext.Company.Where(x => x.CNPJ == company.CNPJ).Any())
             {
-                throw new Exception("Company With this CNPJ already exists");
+                if (!company.Error.IsNullOrEmpty())
+                    company.Error += "\n";
+
+                company.Error = "Company With this CNPJ already exists";
             }
-            else
+            
+            if (company.Error.IsNullOrEmpty())
             {
                 await _dbContext.Company.AddAsync(company);
                 await _dbContext.SaveChangesAsync();
@@ -89,7 +94,12 @@ namespace FoodAPI.Repository
             companyM.Description = company.Description;
             companyM.Password = company.Password;
             companyM.Name = company.Name;
-            companyM.Email = !_dbContext.Company.FirstOrDefault(x => x.Email == company.Email).ToString().IsNullOrEmpty() ? companyM.Email : company.Email;
+
+            if (_dbContext.Company.Where(x => x.Email == company.Email).Any())
+                companyM.Error = "Company With this email already exists";
+            else
+                companyM.Email = company.Email;
+
             companyM.Plan = company.Plan;
 
             await _dbContext.SaveChangesAsync();

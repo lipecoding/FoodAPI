@@ -3,6 +3,7 @@ using FoodAPI.Repository;
 using FoodAPI.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FoodAPI.Controllers
 {
@@ -22,7 +23,10 @@ namespace FoodAPI.Controllers
         {
             CouponModel couponm = await _couponRepo.AddCoupon(coupon);
 
-            return Ok(couponm);
+            if (couponm.Error.IsNullOrEmpty())
+                return Ok(couponm);
+            else
+                return BadRequest(couponm.Error);
         }
         [HttpPost("AddCouponToUser/{code}-{userid}")]
         public async Task<ActionResult<CouponModel>> AddCouponToUser(string code, int userid)
