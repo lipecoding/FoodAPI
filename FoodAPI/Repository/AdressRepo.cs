@@ -45,7 +45,7 @@ namespace FoodAPI.Repository
             return adressM;
         }
 
-        public async Task<List<AdressModel>> FindAdress(int userId)
+        public async Task<List<AdressModel>> GetAdresses(int userId)
         {
             return await _dbContext.Adresses
                 .Where(x => x.UserId == userId)
