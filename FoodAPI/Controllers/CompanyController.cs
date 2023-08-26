@@ -62,7 +62,7 @@ namespace FoodAPI.Controllers
 
             return Ok(login);
         }
-        [HttpPut("UpdateCompany")]
+        [HttpPut("UpdateCompany/{id}")]
         public async Task<ActionResult<CompanyModel>> UpdateCompany(CompanyModel company, int id)
         {
             CompanyModel companyM = await _companyRepo.UpdateCompany(company, id);

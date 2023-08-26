@@ -15,6 +15,7 @@ namespace FoodAPI.Data
         public DbSet<CompanyModel> Company { get; set; }
         public DbSet<MenuModel> Menu { get; set; }
         public DbSet<UserModel> User { get; set; }
+        public DbSet<DelivererModel> Deliverer { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,7 @@ namespace FoodAPI.Data
             modelBuilder.ApplyConfiguration(new CompanyMap());
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new MenuMap());
+            modelBuilder.ApplyConfiguration(new DelivererMap());
 
             base.OnModelCreating(modelBuilder);
         }
