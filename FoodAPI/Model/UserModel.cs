@@ -12,6 +12,6 @@ namespace FoodAPI.Model
         public int Age { get; set; }
         public string CPF { get; set; }
         public PremiumEnum Premium { get; set; }
-        public string Error { get; set; }
+        public string? Error { get; set; }
     }
 }
