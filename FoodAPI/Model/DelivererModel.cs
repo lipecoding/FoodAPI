@@ -17,6 +17,8 @@ namespace FoodAPI.Model
         public int AdressNumber { get; set; }
         public string? Complement { get; set; }
         public DelivererEnum Status { get; set; }
+        public DelivererVehicleEnum DelivererVehicle { get; set; }
         public string? Error { get; set; }
+
     }
 }

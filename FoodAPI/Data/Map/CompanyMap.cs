@@ -16,6 +16,8 @@ namespace FoodAPI.Data.Map
             builder.Property(x => x.CNPJ).IsRequired().HasMaxLength(14);
             builder.Property(x => x.Type).IsRequired();
             builder.Property(x => x.Plan).IsRequired();
+
+            builder.Ignore(x => x.Error);
         }
         
     }

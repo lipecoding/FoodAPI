@@ -16,6 +16,8 @@ namespace FoodAPI.Data.Map
             builder.Property(x => x.Age).IsRequired().HasMaxLength(3);
             builder.Property(x => x.PhoneNumber).IsRequired().HasMaxLength(11);
             builder.Property(x => x.Premium).IsRequired();
+
+            builder.Ignore(x => x.Error);
         }
         
     }
