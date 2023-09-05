@@ -1,4 +1,5 @@
 ﻿using FoodAPI.Data.Map;
+using FoodAPI.Enum;
 using FoodAPI.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,8 @@ namespace FoodAPI.Data
         public DbSet<MenuModel> Menu { get; set; }
         public DbSet<UserModel> User { get; set; }
         public DbSet<DelivererModel> Deliverer { get; set; }
+        public DbSet<DelivererMotorcicleModel> DelivererMotorcicle{ get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +30,7 @@ namespace FoodAPI.Data
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new MenuMap());
             modelBuilder.ApplyConfiguration(new DelivererMap());
+            modelBuilder.ApplyConfiguration(new DelivererMotorcicleMap());
 
             base.OnModelCreating(modelBuilder);
         }

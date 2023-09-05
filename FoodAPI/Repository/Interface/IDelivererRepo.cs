@@ -8,6 +8,6 @@ namespace FoodAPI.Repository.Interface
         Task<List<DelivererModel>> FindAll();
         Task<DelivererModel> AddDeliverer(DelivererModel model);
         Task<DelivererModel> UpdateDeliverer(int id, DelivererModel model);
-        Task<bool> DeleteDeliverer(int id);
+        Task<bool> DeleteDeliverer(int id); 
     }
 }
