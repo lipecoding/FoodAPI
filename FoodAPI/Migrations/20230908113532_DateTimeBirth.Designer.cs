@@ -4,6 +4,7 @@ using FoodAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodAPI.Migrations
 {
     [DbContext(typeof(FoodApiDBContext))]
-    partial class FoodApiDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230908113532_DateTimeBirth")]
+    partial class DateTimeBirth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,8 +105,6 @@ namespace FoodAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "Email" }, "Index_Company");
-
                     b.ToTable("Company");
                 });
 
@@ -127,10 +128,10 @@ namespace FoodAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
                     b.HasIndex("CouponId")
                         .IsUnique();
-
-                    b.HasIndex(new[] { "CompanyId" }, "Index_CouponCompanyRel");
 
                     b.ToTable("CouponCompanyRel");
                 });
@@ -181,8 +182,6 @@ namespace FoodAPI.Migrations
 
                     b.HasIndex("MenuId");
 
-                    b.HasIndex(new[] { "Code" }, "Index_Coupon");
-
                     b.ToTable("Coupon");
                 });
 
@@ -205,7 +204,7 @@ namespace FoodAPI.Migrations
                     b.HasIndex("CouponId")
                         .IsUnique();
 
-                    b.HasIndex(new[] { "UserId" }, "Index_CouponUserRel");
+                    b.HasIndex("UserId");
 
                     b.ToTable("CouponUserRel");
                 });
@@ -265,7 +264,7 @@ namespace FoodAPI.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasMaxLength(1)
@@ -277,8 +276,6 @@ namespace FoodAPI.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex(new[] { "Email", "PhoneNumber" }, "Index_Deliverer");
 
                     b.ToTable("Deliverer");
                 });
@@ -320,7 +317,7 @@ namespace FoodAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "DelivererId", "Renavam", "Placa" }, "Index_Motorcicle");
+                    b.HasIndex("DelivererId");
 
                     b.ToTable("DelivererMotorcicle");
                 });
@@ -410,8 +407,6 @@ namespace FoodAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex(new[] { "PhoneNumber", "Email" }, "Index_User");
 
                     b.ToTable("User");
                 });

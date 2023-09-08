@@ -1,11 +1,7 @@
 ﻿using FoodAPI.Data;
-using FoodAPI.Data.Map;
-using FoodAPI.ENUM;
 using FoodAPI.Model;
 using FoodAPI.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.IdentityModel.Tokens;
 
 namespace FoodAPI.Repository
 {

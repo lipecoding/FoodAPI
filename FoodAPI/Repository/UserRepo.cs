@@ -102,7 +102,7 @@ namespace FoodAPI.Repository
                 userM.Email = user.Email;
 
             userM.Password = user.Password; 
-            userM.Age = user.Age;
+            userM.Birthday = user.Birthday;
 
             if (_dbContext.User.Where(x => x.PhoneNumber == user.PhoneNumber).Any())
             {

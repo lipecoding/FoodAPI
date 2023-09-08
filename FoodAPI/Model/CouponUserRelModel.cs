@@ -1,5 +1,8 @@
-﻿namespace FoodAPI.Model
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace FoodAPI.Model
 {
+    [Index(nameof(UserId), Name = "Index_CouponUserRel")]
     public class CouponUserRelModel
     {
         public int Id { get; set; }
