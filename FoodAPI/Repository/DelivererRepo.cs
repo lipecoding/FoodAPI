@@ -76,7 +76,7 @@ namespace FoodAPI.Repository
             else
                 deliverer.PhoneNumber = model.PhoneNumber;
 
-            deliverer.Age = model.Age;
+            deliverer.Birthday = model.Birthday;
             deliverer.CEP = model.CEP;
             deliverer.AdressNumber = model.AdressNumber;
             deliverer.Complement = model.Complement;

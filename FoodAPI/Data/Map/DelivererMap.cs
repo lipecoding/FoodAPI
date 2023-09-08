@@ -12,7 +12,7 @@ namespace FoodAPI.Data.Map
             builder.Property(x => x.Name).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Email).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Password).IsRequired().HasMaxLength(255);
-            builder.Property(x => x.Age).IsRequired().HasMaxLength(3);
+            builder.Property(x => x.Birthday).IsRequired();
             builder.Property(x => x.CPF).IsRequired().HasMaxLength(11);
             builder.Property(x => x.CNH).IsRequired().HasMaxLength(10);
             builder.Property(x => x.CEP).IsRequired().HasMaxLength(8);

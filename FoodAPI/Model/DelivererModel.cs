@@ -10,7 +10,7 @@ namespace FoodAPI.Model
         public string Password { get; set; }
         public string CNH { get; set; }
         public string CPF { get; set; }
-        public int Age { get; set; }
+        public DateTime Birthday { get; set; }
         public string PhoneNumber { get; set; }
         public string CEP { get; set; }
         public string Street { get; set; }
