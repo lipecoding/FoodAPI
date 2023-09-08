@@ -18,29 +18,17 @@ namespace FoodAPI.Repository
 
         public async Task<DelivererMotorcicleModel> AddDelivererMotorcicle(DelivererMotorcicleModel model)
         {
-            if(_dbContext.DelivererMotorcicle.Where(x => x.Marca == model.Marca).Any())
-            {
-                model.Error = "Already exists one Deliverer with this Email!";
-            }
-            if(_dbContext.DelivererMotorcicle.Where(x => x.Modelo == model.Modelo).Any())
-            {
-                model.Error = "Already exists one Deliverer with this Modelo!";
-            }
-            if(_dbContext.DelivererMotorcicle.Where(x => x.Ano == model.Ano).Any())
-            {
-                model.Error = "Already exists one Deliverer with this Ano!";
-            }
             if(_dbContext.DelivererMotorcicle.Where(x => x.Placa == model.Placa).Any())
             {
-                model.Error = "Already exists one Deliverer with this Placa!";
+                model.Error = "Already exists one Motorcicle with this Placa!";
             }
             if(_dbContext.DelivererMotorcicle.Where(x => x.Renavam == model.Renavam).Any())
             {
-                model.Error = "Already exists one Deliverer with this Renavam Code";
+                model.Error = "Already exists one Motorcicle with this Renavam Code";
             }
             if(_dbContext.DelivererMotorcicle.Where(x => x.DelivererId == model.DelivererId).Any())
             {
-                model.Error = "Already exists one Deliverer with this DelivererId";
+                model.Error = "Already exists one Motorcicle with this DelivererId";
             }
             if(model.Error.IsNullOrEmpty())
             {

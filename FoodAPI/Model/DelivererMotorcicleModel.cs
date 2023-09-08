@@ -1,5 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace FoodAPI.Model
 {
+    [Index(nameof(DelivererId), nameof(Renavam), nameof(Placa), Name = "Index_Motorcicle")]
     public class DelivererMotorcicleModel
     {
         public int Id { get; set; }

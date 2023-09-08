@@ -1,7 +1,9 @@
 ﻿using FoodAPI.Enum;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodAPI.Model
 {
+    [Index(nameof(Email), nameof(PhoneNumber), Name = "Index_Deliverer")]
     public class DelivererModel
     {
         public int Id { get; set; }

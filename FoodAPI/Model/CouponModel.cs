@@ -1,7 +1,9 @@
 ﻿using FoodAPI.ENUM;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodAPI.Model
 {
+    [Index(nameof(Code), Name = "Index_Coupon")]
     public class CouponModel
     {
         public int Id { get; set; }
