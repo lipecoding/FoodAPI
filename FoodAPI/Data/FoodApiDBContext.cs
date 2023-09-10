@@ -18,7 +18,8 @@ namespace FoodAPI.Data
         public DbSet<UserModel> User { get; set; }
         public DbSet<DelivererModel> Deliverer { get; set; }
         public DbSet<DelivererMotorcicleModel> DelivererMotorcicle{ get; set; }
-
+        public DbSet<OrderModel> Order { get; set; }
+        public DbSet<OrderItensModel> OrderItens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +32,8 @@ namespace FoodAPI.Data
             modelBuilder.ApplyConfiguration(new MenuMap());
             modelBuilder.ApplyConfiguration(new DelivererMap());
             modelBuilder.ApplyConfiguration(new DelivererMotorcicleMap());
+            modelBuilder.ApplyConfiguration(new OrderMap());
+            modelBuilder.ApplyConfiguration(new OrderItensMap());
 
             base.OnModelCreating(modelBuilder);
         }

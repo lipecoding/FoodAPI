@@ -6,7 +6,7 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public string Categories { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
         public int Discount { get; set; }
         public string Image { get; set; }
         public bool IsActive { get; set; }
