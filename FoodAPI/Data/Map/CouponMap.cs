@@ -17,8 +17,8 @@ namespace FoodAPI.Data.Map
             builder.Property(x => x.V_Type).IsRequired();
             builder.Property(x => x.ItemID);
             builder.HasOne(x => x.Menu);
-            builder.HasOne(x => x.UserRel);
-            builder.HasOne(x => x.CompanyRel);
+            builder.HasMany(x => x.UserRel).WithOne(x => x.Coupon);
+            builder.HasMany(x => x.CompanyRel).WithOne(x => x.Coupon);
 
             builder.Ignore(x => x.Error);
         }

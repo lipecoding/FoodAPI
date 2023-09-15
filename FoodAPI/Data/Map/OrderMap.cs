@@ -17,12 +17,12 @@ namespace FoodAPI.Data.Map
             builder.Property(x => x.CouponId);
             builder.Property(x => x.Date).IsRequired();
             builder.Property(x => x.Status).IsRequired();
-            builder.HasOne(x => x.User);
+            builder.HasOne(x => x.User).WithMany().OnDelete(DeleteBehavior.NoAction);
             builder.HasOne(x => x.Adress);
             builder.HasOne(x => x.Deliverer);
             builder.HasOne(x => x.Company);
             builder.HasOne(x => x.Coupon);
-            builder.HasOne(x => x.Itens);
+            builder.HasMany(x => x.Itens).WithOne(x => x.Order);
 
             builder.Ignore(x => x.Error);
         }

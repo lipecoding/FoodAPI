@@ -16,8 +16,8 @@ namespace FoodAPI.Model
         public VTypeEnum V_Type { get; set; }
         public CompanyTypeEnum Categorie { get; set; }
         public PremiumEnum Premium { get; set; }
-        public virtual CouponUserRelModel? UserRel { get; set; }
-        public virtual CouponCompanyRelModel CompanyRel { get; set; }
+        public virtual List<CouponUserRelModel>? UserRel { get; set; }
+        public virtual List<CouponCompanyRelModel> CompanyRel { get; set; }
         public string? Error { get; set; }
     }
 }

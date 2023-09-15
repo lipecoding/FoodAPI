@@ -15,8 +15,6 @@ services:
     environment:
       ACCEPT_EULA: 'Y'
       SA_PASSWORD: "FoodApi@"
-    volumes:
-      - c:\dados\volumes\mssql:/var/opt/mssql3
     ports:
       - '1433:1433'    
     expose:

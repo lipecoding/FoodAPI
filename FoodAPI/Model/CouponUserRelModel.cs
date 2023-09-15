@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace FoodAPI.Model
 {
@@ -7,6 +8,7 @@ namespace FoodAPI.Model
     {
         public int Id { get; set; }
         public int CouponId { get; set; }
+        [JsonIgnore]
         public virtual CouponModel Coupon { get; set; }
         public int UserId { get; set; }
         public virtual UserModel User { get; set;}

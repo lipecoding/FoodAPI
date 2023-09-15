@@ -15,7 +15,7 @@ namespace FoodAPI.Data.Map
             builder.Property(x => x.Placa).IsRequired().HasMaxLength(7);
             builder.Property(x => x.Renavam).IsRequired().HasMaxLength(9);
             builder.Property(x => x.DelivererId).IsRequired();
-            builder.HasOne(x => x.Deliverer);
+            builder.HasOne(x => x.Deliverer).WithOne();
             builder.Ignore(x => x.Error);
         }
         

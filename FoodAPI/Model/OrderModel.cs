@@ -17,7 +17,7 @@ namespace FoodAPI.Model
         public virtual AdressModel Adress { get; set; }
         public double Value { get; set; }
         public DateTime Date { get; set; }
-        public virtual OrderItensModel Itens { get; set; }
+        public virtual List<OrderItensModel> Itens { get; set; }
         public OrderStatusEnum Status { get; set; }
         public string? Error { get; set; }
     }

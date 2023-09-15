@@ -12,9 +12,8 @@ namespace FoodAPI.Data.Map
             builder.Property(x => x.OrderId).IsRequired();
             builder.Property(x => x.Amount).IsRequired();
             builder.Property(x => x.MenuId).IsRequired();
-            builder.Property(x => x.Value).IsRequired();
             builder.HasOne(x => x.Menu);
-            builder.HasOne(x => x.Order);
+            builder.HasOne(x => x.Order).WithMany(x => x.Itens).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

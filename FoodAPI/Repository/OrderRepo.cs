@@ -15,8 +15,9 @@ namespace FoodAPI.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<OrderModel> AddOrder(OrderModel order, List<OrderItensModel> itens)
+        public async Task<OrderModel> AddOrder(OrderModel order)
         {
+            order.Error = null;
             if(_dbContext.Order.Where(x => x.Date == DateTime.Now && x.UserId == order.UserId).Any())
             {
                 order.Error = "Already Exists this order.";
@@ -25,7 +26,6 @@ namespace FoodAPI.Repository
             {
                 order.Date = DateTime.Now;
                 await _dbContext.Order.AddAsync(order);
-                await _dbContext.OrderItens.AddRangeAsync(itens);
                 await _dbContext.SaveChangesAsync();
             }
             return order;
@@ -36,7 +36,7 @@ namespace FoodAPI.Repository
         {
             OrderModel order = await GetOrder(id);
             _dbContext.Order.Remove(order);
-            _dbContext.OrderItens.RemoveRange(order.Itens);
+            _dbContext.OrderItens.RemoveRange(Itens(id));
             await _dbContext.SaveChangesAsync();
             return true;
         }
@@ -106,6 +106,11 @@ namespace FoodAPI.Repository
             await _dbContext.SaveChangesAsync();
 
             return order;
+        }
+
+        private List<OrderItensModel> Itens(int id)
+        {
+            return _dbContext.OrderItens.Where(x => x.OrderId == id).ToList();
         }
     }
 }

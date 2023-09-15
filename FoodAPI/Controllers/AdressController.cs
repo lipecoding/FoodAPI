@@ -1,8 +1,6 @@
 using FoodAPI.Model;
-using FoodAPI.Repository;
 using FoodAPI.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace FoodAPI.Controllers
 {

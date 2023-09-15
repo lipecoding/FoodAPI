@@ -12,7 +12,7 @@ namespace FoodAPI.Repository.Interface
         public Task<List<OrderModel>> GetOrdersByDelivererId(int delivererId);
         public Task<List<OrderModel>> GetOrdersByMenuId(int menuId);
         public Task<OrderModel> UpdateOrderStatus(int id, OrderStatusEnum status);
-        public Task<OrderModel> AddOrder(OrderModel order, List<OrderItensModel> itens);
+        public Task<OrderModel> AddOrder(OrderModel order);
         public Task<OrderModel> UpdateOrder(OrderModel order, int id);
         public Task<bool> DeleteOrder(int id);
     }

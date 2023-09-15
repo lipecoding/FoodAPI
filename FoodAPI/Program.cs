@@ -2,6 +2,7 @@ using FoodAPI.Data;
 using FoodAPI.Repository;
 using FoodAPI.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace FoodAPI
 {
@@ -11,7 +12,11 @@ namespace FoodAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddNewtonsoftJson(opt =>
+                {
+                    opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -26,6 +31,8 @@ namespace FoodAPI
             builder.Services.AddScoped<IAdressRepo, AdressRepo>();
             builder.Services.AddScoped<ICouponRepo, CouponRepo>();
             builder.Services.AddScoped<IMenuRepo, MenuRepo>();
+            builder.Services.AddScoped<IDelivererRepo, DelivererRepo>();
+            builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 
             var app = builder.Build();
 

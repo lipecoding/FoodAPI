@@ -4,6 +4,7 @@ using FoodAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodAPI.Migrations
 {
     [DbContext(typeof(FoodApiDBContext))]
-    partial class FoodApiDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230915145912_Coupon")]
+    partial class Coupon
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,8 +59,7 @@ namespace FoodAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Adresses");
                 });
@@ -321,9 +323,6 @@ namespace FoodAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DelivererId")
-                        .IsUnique();
-
                     b.HasIndex(new[] { "DelivererId", "Renavam", "Placa" }, "Index_Motorcicle");
 
                     b.ToTable("DelivererMotorcicle");
@@ -499,8 +498,8 @@ namespace FoodAPI.Migrations
             modelBuilder.Entity("FoodAPI.Model.AdressModel", b =>
                 {
                     b.HasOne("FoodAPI.Model.UserModel", "User")
-                        .WithOne()
-                        .HasForeignKey("FoodAPI.Model.AdressModel", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -557,8 +556,8 @@ namespace FoodAPI.Migrations
             modelBuilder.Entity("FoodAPI.Model.DelivererMotorcicleModel", b =>
                 {
                     b.HasOne("FoodAPI.Model.DelivererModel", "Deliverer")
-                        .WithOne()
-                        .HasForeignKey("FoodAPI.Model.DelivererMotorcicleModel", "DelivererId")
+                        .WithMany()
+                        .HasForeignKey("DelivererId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
