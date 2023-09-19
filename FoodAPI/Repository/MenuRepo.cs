@@ -13,7 +13,7 @@ namespace FoodAPI.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<MenuModel> AddItem(MenuModel model)
+        public async Task<Menu> AddItem(Menu model)
         {
             await _dbContext.Menu.AddAsync(model);
             await _dbContext.SaveChangesAsync();
@@ -21,9 +21,9 @@ namespace FoodAPI.Repository
             return model;
         }
 
-        public async Task<bool> DeleteItem(int id)
+        public async Task<bool> DeleteItem(Guid id)
         {
-            MenuModel item = await FindItemByID(id);
+            Menu item = await FindItemByID(id);
 
             _dbContext.Menu.Remove(item);
             await _dbContext.SaveChangesAsync();
@@ -31,9 +31,9 @@ namespace FoodAPI.Repository
             return true;
         }
 
-        public async Task<List<MenuModel>> FindAllItens(int companyId)
+        public async Task<List<Menu>> FindAllItens(Guid companyId)
         {
-            List<MenuModel> itemList = await _dbContext.Menu.Where(x => x.CompanyId == companyId).ToListAsync();
+            List<Menu> itemList = await _dbContext.Menu.Where(x => x.CompanyId == companyId).ToListAsync();
 
             if (itemList == null)
             {
@@ -43,9 +43,9 @@ namespace FoodAPI.Repository
             return itemList;
         }
 
-        public async Task<MenuModel> FindItemByID(int id)
+        public async Task<Menu> FindItemByID(Guid id)
         {
-            MenuModel item = await _dbContext.Menu.FirstOrDefaultAsync(x => x.Id == id);
+            Menu item = await _dbContext.Menu.FirstOrDefaultAsync(x => x.Id == id);
             if (item == null)
             {
                 throw new Exception($"ITEM ID: {id} Unknown!");
@@ -53,7 +53,7 @@ namespace FoodAPI.Repository
             return item;
         }
 
-        public async Task<List<MenuModel>> FindItensByName(string name)
+        public async Task<List<Menu>> FindItensByName(string name)
         {
             return await (from menu in _dbContext.Menu
                           where menu.Name.Contains(name)
@@ -61,14 +61,14 @@ namespace FoodAPI.Repository
 
         }
 
-        public async Task<List<MenuModel>> FindItensByCategorie(string categorie)
+        public async Task<List<Menu>> FindItensByCategorie(string categorie)
         {
             return await (from menu in _dbContext.Menu
                           where menu.Categories.Contains(categorie)
                           select menu).ToListAsync();
         }
 
-        public async Task<MenuModel> UpdateItem(MenuModel model, int id)
+        public async Task<Menu> UpdateItem(Menu model, Guid id)
         {
             await FindItemByID(id);
 

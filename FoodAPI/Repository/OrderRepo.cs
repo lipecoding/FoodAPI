@@ -15,7 +15,7 @@ namespace FoodAPI.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<OrderModel> AddOrder(OrderModel order)
+        public async Task<Order> AddOrder(Order order)
         {
             order.Error = null;
             if(_dbContext.Order.Where(x => x.Date == DateTime.Now && x.UserId == order.UserId).Any())
@@ -32,23 +32,23 @@ namespace FoodAPI.Repository
             
         }
 
-        public async Task<bool> DeleteOrder(int id)
+        public async Task<bool> DeleteOrder(Guid id)
         {
-            OrderModel order = await GetOrder(id);
+            Order order = await GetOrder(id);
             _dbContext.Order.Remove(order);
             _dbContext.OrderItens.RemoveRange(Itens(id));
             await _dbContext.SaveChangesAsync();
             return true;
         }
 
-        public async Task<OrderModel> GetOrder(int id)
+        public async Task<Order> GetOrder(Guid id)
         {
-            OrderModel order = await _dbContext.Order.FirstOrDefaultAsync(x => x.Id == id);
+            Order order = await _dbContext.Order.FirstOrDefaultAsync(x => x.Id == id);
 
             return order;
         }
 
-        public async Task<List<OrderModel>> GetOrdersByCompanyId(int companyId)
+        public async Task<List<Order>> GetOrdersByCompanyId(Guid companyId)
         {
             return await (from Order in _dbContext.Order
                           join Company in _dbContext.Company
@@ -57,7 +57,7 @@ namespace FoodAPI.Repository
                           select Order).ToListAsync();
         }
 
-        public async Task<List<OrderModel>> GetOrdersByCouponId(int couponId)
+        public async Task<List<Order>> GetOrdersByCouponId(Guid couponId)
         {
             return await(from Order in _dbContext.Order
                          join Coupon in _dbContext.Coupon
@@ -66,7 +66,7 @@ namespace FoodAPI.Repository
                          select Order).ToListAsync();   
         }
 
-        public async Task<List<OrderModel>> GetOrdersByDelivererId(int delivererId)
+        public async Task<List<Order>> GetOrdersByDelivererId(Guid delivererId)
         {
             return await(from Order in _dbContext.Order
                          join Deliverer in _dbContext.Deliverer
@@ -75,7 +75,7 @@ namespace FoodAPI.Repository
                          select Order).ToListAsync();
         }
 
-        public async Task<List<OrderModel>> GetOrdersByMenuId(int menuId)
+        public async Task<List<Order>> GetOrdersByMenuId(Guid menuId)
         {
             return await(from Order in _dbContext.Order
                          join Menu in _dbContext.Menu
@@ -84,7 +84,7 @@ namespace FoodAPI.Repository
                          select Order).ToListAsync();
         }
 
-        public async Task<List<OrderModel>> GetOrdersByUserId(int userId)
+        public async Task<List<Order>> GetOrdersByUserId(Guid userId)
         {
             return await(from Order in _dbContext.Order
                          join User in _dbContext.User
@@ -93,14 +93,14 @@ namespace FoodAPI.Repository
                          select Order).ToListAsync();
         }
 
-        public Task<OrderModel> UpdateOrder(OrderModel order, int id)
+        public Task<Order> UpdateOrder(Order order, Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<OrderModel> UpdateOrderStatus(int id, OrderStatusEnum status)
+        public async Task<Order> UpdateOrderStatus(Guid id, OrderStatusEnum status)
         {
-            OrderModel order = await GetOrder(id);
+            Order order = await GetOrder(id);
             order.Status = status;
             _dbContext.Order.Update(order);
             await _dbContext.SaveChangesAsync();
@@ -108,7 +108,7 @@ namespace FoodAPI.Repository
             return order;
         }
 
-        private List<OrderItensModel> Itens(int id)
+        private List<Item> Itens(Guid id)
         {
             return _dbContext.OrderItens.Where(x => x.OrderId == id).ToList();
         }

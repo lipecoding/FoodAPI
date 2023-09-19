@@ -18,9 +18,9 @@ namespace FoodAPI.Controllers
         }
 
         [HttpPost("AddItem")]
-        public async Task<ActionResult<MenuModel>> AddItem(MenuModel model)
+        public async Task<ActionResult<Menu>> AddItem(Menu model)
         {
-            MenuModel menuM = await _menuRepo.AddItem(model);
+            Menu menuM = await _menuRepo.AddItem(model);
 
             if(menuM.Error.IsNullOrEmpty())
                 return Ok(menuM);
@@ -28,44 +28,44 @@ namespace FoodAPI.Controllers
                 return BadRequest(menuM.Error);
         }
         [HttpDelete("DeleteItem/{id}")]
-        public async Task<ActionResult<bool>> DeleteItem(int id)
+        public async Task<ActionResult<bool>> DeleteItem(Guid id)
         {
             bool del = await _menuRepo.DeleteItem(id);
 
             return Ok(del);
         }
         [HttpGet("FindAllItens/{companyId}")]
-        public async Task<ActionResult<List<MenuModel>>> FindAllItens(int companyId)
+        public async Task<ActionResult<List<Menu>>> FindAllItens(Guid companyId)
         {
-            List<MenuModel> menus = await _menuRepo.FindAllItens(companyId);
+            List<Menu> menus = await _menuRepo.FindAllItens(companyId);
 
             return Ok(menus);
         }
         [HttpGet("FindItemByID/{id}")]
-        public async Task<ActionResult<MenuModel>> FindItemByID(int id)
+        public async Task<ActionResult<Menu>> FindItemByID(Guid id)
         {
-            MenuModel menu = await _menuRepo.FindItemByID(id);
+            Menu menu = await _menuRepo.FindItemByID(id);
 
             return Ok(menu);
         }
         [HttpPut("UpdateItem/{id}")]
-        public async Task<ActionResult<MenuModel>> UpdateItem(MenuModel menu, int id)
+        public async Task<ActionResult<Menu>> UpdateItem(Menu menu, Guid id)
         {
-            MenuModel menuM = await _menuRepo.UpdateItem(menu, id);
+            Menu menuM = await _menuRepo.UpdateItem(menu, id);
 
             return Ok(menuM);
         }
         [HttpGet("FindItensByName/{name}")]
-        public async Task<ActionResult<List<MenuModel>>> FindItensByName(string name)
+        public async Task<ActionResult<List<Menu>>> FindItensByName(string name)
         {
-            List<MenuModel> menus = await _menuRepo.FindItensByName(name);
+            List<Menu> menus = await _menuRepo.FindItensByName(name);
 
             return Ok(menus);
         }
         [HttpGet("FindItensByCategorie/{categorie}")]
-        public async Task<ActionResult<List<MenuModel>>> FindItensByCategorie(string categorie)
+        public async Task<ActionResult<List<Menu>>> FindItensByCategorie(string categorie)
         {
-            List<MenuModel> menus = await _menuRepo.FindItensByCategorie(categorie);
+            List<Menu> menus = await _menuRepo.FindItensByCategorie(categorie);
 
             return Ok(menus);
         }

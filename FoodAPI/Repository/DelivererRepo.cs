@@ -15,7 +15,7 @@ namespace FoodAPI.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<DelivererModel> AddDeliverer(DelivererModel model)
+        public async Task<Deliverer> AddDeliverer(Deliverer model)
         {
             if(_dbContext.Deliverer.Where(x => x.Email == model.Email).Any())
             {
@@ -41,28 +41,28 @@ namespace FoodAPI.Repository
             return model;
         }
 
-        public async Task<bool> DeleteDeliverer(int id)
+        public async Task<bool> DeleteDeliverer(Guid id)
         {
-            DelivererModel model = await FindById(id);
+            Deliverer model = await FindById(id);
 
             _dbContext.Deliverer.Remove(model);
             await _dbContext.SaveChangesAsync();
             return true;
         }
 
-        public async Task<List<DelivererModel>> FindAll()
+        public async Task<List<Deliverer>> FindAll()
         {
             return await _dbContext.Deliverer.ToListAsync();
         }
 
-        public async Task<DelivererModel> FindById(int id)
+        public async Task<Deliverer> FindById(Guid id)
         {
             return await _dbContext.Deliverer.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<DelivererModel> UpdateDeliverer(int id, DelivererModel model)
+        public async Task<Deliverer> UpdateDeliverer(Guid id, Deliverer model)
         {
-            DelivererModel deliverer = await FindById(id);
+            Deliverer deliverer = await FindById(id);
 
             deliverer.Name = model.Name;
 

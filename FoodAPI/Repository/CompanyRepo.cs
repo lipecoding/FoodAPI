@@ -14,7 +14,7 @@ namespace FoodAPI.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<CompanyModel> AddCompany(CompanyModel company)
+        public async Task<Company> AddCompany(Company company)
         {
             if (_dbContext.Company.Where(x => x.Email == company.Email).Any())
             {
@@ -38,9 +38,9 @@ namespace FoodAPI.Repository
             return company;
         }
 
-        public async Task<bool> DeleteCompany(int id)
+        public async Task<bool> DeleteCompany(Guid id)
         {
-            CompanyModel company = await FindById(id);
+            Company company = await FindById(id);
 
             _dbContext.Company.Remove(company);
             await _dbContext.SaveChangesAsync();
@@ -48,14 +48,14 @@ namespace FoodAPI.Repository
             return true;
         }
 
-        public async Task<List<CompanyModel>> FindAllCompanys()
+        public async Task<List<Company>> FindAllCompanys()
         {
             return await _dbContext.Company.ToListAsync();
         }
 
-        public async Task<CompanyModel> FindByEmail(string email)
+        public async Task<Company> FindByEmail(string email)
         {
-            CompanyModel company = await _dbContext.Company.FirstOrDefaultAsync(x => x.Email == email);
+            Company company = await _dbContext.Company.FirstOrDefaultAsync(x => x.Email == email);
             if (company == null)
             {
                 throw new Exception($"Company ID: {email} Unknown!");
@@ -64,9 +64,9 @@ namespace FoodAPI.Repository
             return company;
         }
 
-        public async Task<CompanyModel> FindById(int id)
+        public async Task<Company> FindById(Guid id)
         {
-            CompanyModel company = await _dbContext.Company.FirstOrDefaultAsync(x => x.Id == id);
+            Company company = await _dbContext.Company.FirstOrDefaultAsync(x => x.Id == id);
             if (company == null)
             {
                 throw new Exception($"Company ID: {id} Unknown!");
@@ -77,7 +77,7 @@ namespace FoodAPI.Repository
 
         public async Task<bool> Login(string email, string password)
         {
-            CompanyModel company = await _dbContext.Company.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
+            Company company = await _dbContext.Company.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
 
             if (company == null)
             {
@@ -86,9 +86,9 @@ namespace FoodAPI.Repository
             return true;
         }
 
-        public async Task<CompanyModel> UpdateCompany(CompanyModel company, int id)
+        public async Task<Company> UpdateCompany(Company company, Guid id)
         {
-            CompanyModel companyM = await _dbContext.Company.FirstOrDefaultAsync(x => x.Id == id);
+            Company companyM = await _dbContext.Company.FirstOrDefaultAsync(x => x.Id == id);
 
             companyM.Type = company.Type;
             companyM.Description = company.Description;

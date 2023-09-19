@@ -5,15 +5,15 @@ namespace FoodAPI.Repository.Interface
 {
     public interface IOrderRepo
     {
-        public Task<OrderModel> GetOrder(int id);
-        public Task<List<OrderModel>> GetOrdersByUserId(int userId);
-        public Task<List<OrderModel>> GetOrdersByCompanyId(int companyId);
-        public Task<List<OrderModel>> GetOrdersByCouponId(int couponId);
-        public Task<List<OrderModel>> GetOrdersByDelivererId(int delivererId);
-        public Task<List<OrderModel>> GetOrdersByMenuId(int menuId);
-        public Task<OrderModel> UpdateOrderStatus(int id, OrderStatusEnum status);
-        public Task<OrderModel> AddOrder(OrderModel order);
-        public Task<OrderModel> UpdateOrder(OrderModel order, int id);
-        public Task<bool> DeleteOrder(int id);
+        public Task<Order> GetOrder(Guid id);
+        public Task<List<Order>> GetOrdersByUserId(Guid userId);
+        public Task<List<Order>> GetOrdersByCompanyId(Guid companyId);
+        public Task<List<Order>> GetOrdersByCouponId(Guid couponId);
+        public Task<List<Order>> GetOrdersByDelivererId(Guid delivererId);
+        public Task<List<Order>> GetOrdersByMenuId(Guid menuId);
+        public Task<Order> UpdateOrderStatus(Guid id, OrderStatusEnum status);
+        public Task<Order> AddOrder(Order order);
+        public Task<Order> UpdateOrder(Order order, Guid id);
+        public Task<bool> DeleteOrder(Guid id);
     }
 }

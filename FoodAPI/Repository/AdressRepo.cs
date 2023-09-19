@@ -12,16 +12,16 @@ namespace FoodAPI.Repository
         { 
             _dbContext = dBContext;
         }
-        public async Task<AdressModel> AddAdress(AdressModel adress)
+        public async Task<Adress> AddAdress(Adress adress)
         {
             await _dbContext.Adresses.AddAsync(adress);
             await _dbContext.SaveChangesAsync();
 
             return adress;
         }
-        public async Task<AdressModel> UpdateAdress(AdressModel adress, int id)
+        public async Task<Adress> UpdateAdress(Adress adress, Guid id)
         {
-            AdressModel adressModel = await FindAdressByid(id);
+            Adress adressModel = await FindAdressByid(id);
             
             adressModel.Id = id;
             adressModel.CEP = adress.CEP;
@@ -35,9 +35,9 @@ namespace FoodAPI.Repository
             return adressModel;
         }
 
-        public async Task<AdressModel> FindAdressByid(int id)
+        public async Task<Adress> FindAdressByid(Guid id)
         {
-            AdressModel adressM = await _dbContext.Adresses.FirstOrDefaultAsync(x => x.Id == id);
+            Adress adressM = await _dbContext.Adresses.FirstOrDefaultAsync(x => x.Id == id);
             if (adressM == null)
             {
                 throw new Exception($"Adress ID: {id} Unknown!");
@@ -45,16 +45,16 @@ namespace FoodAPI.Repository
             return adressM;
         }
 
-        public async Task<List<AdressModel>> FindAdress(int userId)
+        public async Task<List<Adress>> FindAdress(Guid userId)
         {
             return await _dbContext.Adresses
                 .Where(x => x.UserId == userId)
                 .ToListAsync();
         }
 
-        public async Task<bool> DeleteAdress(int adressId)
+        public async Task<bool> DeleteAdress(Guid adressId)
         {
-            AdressModel adressModel = await FindAdressByid(adressId);
+            Adress adressModel = await FindAdressByid(adressId);
 
             _dbContext.Adresses.Remove(adressModel);
             await _dbContext.SaveChangesAsync();

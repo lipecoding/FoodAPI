@@ -4,11 +4,11 @@ namespace FoodAPI.Repository.Interface
 {
     public interface IDelivererMotorcicleRepo
     {
-        Task<DelivererMotorcicleModel> FindById(int id);
-        Task<DelivererMotorcicleModel> FindByUserId(int userId);
-        Task<List<DelivererMotorcicleModel>> FindAllMotorcicle();
-        Task<DelivererMotorcicleModel> AddDelivererMotorcicle(DelivererMotorcicleModel model);
-        Task<DelivererMotorcicleModel> UpdateDelivererMotorcicle(int id, DelivererMotorcicleModel model);
-        Task<bool> DeleteDelivererMotorcicle(int id); 
+        Task<DelivererMotorcicle> FindById(Guid id);
+        Task<DelivererMotorcicle> FindByUserId(Guid userId);
+        Task<List<DelivererMotorcicle>> FindAllMotorcicle();
+        Task<DelivererMotorcicle> AddDelivererMotorcicle(DelivererMotorcicle model);
+        Task<DelivererMotorcicle> UpdateDelivererMotorcicle(Guid id, DelivererMotorcicle model);
+        Task<bool> DeleteDelivererMotorcicle(Guid id); 
     }
 }

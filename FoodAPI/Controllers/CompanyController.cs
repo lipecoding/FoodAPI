@@ -18,9 +18,9 @@ namespace FoodAPI.Controllers
         }
 
         [HttpPost("AddCompany")]
-        public async Task<ActionResult<CompanyModel>> AddCompany(CompanyModel company)
+        public async Task<ActionResult<Company>> AddCompany(Company company)
         {
-            CompanyModel companyM = await _companyRepo.AddCompany(company);
+            Company companyM = await _companyRepo.AddCompany(company);
 
             if(companyM.Error.IsNullOrEmpty())
                 return Ok(companyM);
@@ -28,30 +28,30 @@ namespace FoodAPI.Controllers
                 return BadRequest(companyM.Error);
         }
         [HttpDelete("DeleteCompany/{id}")]
-        public async Task<ActionResult<bool>> DeleteCompany(int id)
+        public async Task<ActionResult<bool>> DeleteCompany(Guid id)
         {
             bool del = await _companyRepo.DeleteCompany(id);
 
             return Ok(del);
         }
         [HttpGet("FindAllCompanys")]
-        public async Task<ActionResult<List<CompanyModel>>> FindAllCompanys()
+        public async Task<ActionResult<List<Company>>> FindAllCompanys()
         {
-            List<CompanyModel> companys = await _companyRepo.FindAllCompanys();
+            List<Company> companys = await _companyRepo.FindAllCompanys();
 
             return Ok(companys);
         }
         [HttpGet("FindByEmail/{email}")]
-        public async Task<ActionResult<CompanyModel>> FindByEmail(string email)
+        public async Task<ActionResult<Company>> FindByEmail(string email)
         {
-            CompanyModel company = await _companyRepo.FindByEmail(email);
+            Company company = await _companyRepo.FindByEmail(email);
 
             return Ok(company);
         }
         [HttpGet("FindById")]
-        public async Task<ActionResult<CompanyModel>> FindById(int id)
+        public async Task<ActionResult<Company>> FindById(Guid id)
         {
-            CompanyModel company = await _companyRepo.FindById(id);
+            Company company = await _companyRepo.FindById(id);
 
             return Ok(company);
         }
@@ -63,9 +63,9 @@ namespace FoodAPI.Controllers
             return Ok(login);
         }
         [HttpPut("UpdateCompany/{id}")]
-        public async Task<ActionResult<CompanyModel>> UpdateCompany(CompanyModel company, int id)
+        public async Task<ActionResult<Company>> UpdateCompany(Company company, Guid id)
         {
-            CompanyModel companyM = await _companyRepo.UpdateCompany(company, id);
+            Company companyM = await _companyRepo.UpdateCompany(company, id);
 
             return Ok(companyM);
         }

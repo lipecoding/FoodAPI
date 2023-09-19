@@ -17,23 +17,23 @@ namespace FoodAPI.Controllers
         }
 
         [HttpGet("FindAll")]
-        public async Task<ActionResult<List<DelivererModel>>> FindAll() 
+        public async Task<ActionResult<List<Deliverer>>> FindAll() 
         {
-            List<DelivererModel> deliverer = await _repo.FindAll();
+            List<Deliverer> deliverer = await _repo.FindAll();
 
             return Ok(deliverer);
         }
         [HttpGet("FindById/{id}")]
-        public async Task<ActionResult<DelivererModel>> FindById(int id)
+        public async Task<ActionResult<Deliverer>> FindById(Guid id)
         {
-            DelivererModel deliverer = await _repo.FindById(id);
+            Deliverer deliverer = await _repo.FindById(id);
 
             return Ok(deliverer);
         }
         [HttpPost("AddDeliverer")]
-        public async Task<ActionResult<DelivererModel>> AddDeliverer(DelivererModel model)
+        public async Task<ActionResult<Deliverer>> AddDeliverer(Deliverer model)
         {
-            DelivererModel deliverer = await _repo.AddDeliverer(model);
+            Deliverer deliverer = await _repo.AddDeliverer(model);
 
             if (deliverer.Error.IsNullOrEmpty())
                 return Ok(deliverer);
@@ -41,14 +41,14 @@ namespace FoodAPI.Controllers
                 return BadRequest(deliverer.Error);
         }
         [HttpPut("UpdateDeliverer/{id}")]
-        public async Task<ActionResult<DelivererModel>> UpdateDeliverer(int id, DelivererModel model)
+        public async Task<ActionResult<Deliverer>> UpdateDeliverer(Guid id, Deliverer model)
         {
-            DelivererModel deliverer = await _repo.UpdateDeliverer(id, model);
+            Deliverer deliverer = await _repo.UpdateDeliverer(id, model);
 
             return Ok(deliverer);
         }
         [HttpDelete("DeleteDeliverer/{id}")]
-        public async Task<ActionResult<bool>> DeleteDeliverer(int id)
+        public async Task<ActionResult<bool>> DeleteDeliverer(Guid id)
         {
             bool del = await _repo.DeleteDeliverer(id);
 

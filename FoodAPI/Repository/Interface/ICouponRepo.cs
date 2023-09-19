@@ -5,14 +5,14 @@ namespace FoodAPI.Repository.Interface
 {
     public interface ICouponRepo
     {
-        Task<List<CouponModel>> FindAllCoupon();
-        Task<CouponModel> FindById(int id);
-        Task<List<CouponModel>> FindByUserId(int userId);
-        Task<List<CouponModel>> FindByCompanyId(int companyId);
-        Task<CouponModel> FindByCode(string code);
-        Task<CouponModel> AddCoupon(CouponModel coupon);
-        Task<CouponModel> UpdateCoupon(CouponModel coupon, int id);
-        Task<CouponModel> AddCouponToUser(string code, int userId);
-        Task<bool> DeleteCoupon(int id);
+        Task<List<Coupon>> FindAllCoupon();
+        Task<Coupon> FindById(Guid id);
+        Task<List<Coupon>> FindByUserId(Guid userId);
+        Task<List<Coupon>> FindByCompanyId(Guid companyId);
+        Task<Coupon> FindByCode(string code);
+        Task<Coupon> AddCoupon(Coupon coupon);
+        Task<Coupon> UpdateCoupon(Coupon coupon, Guid id);
+        Task<Coupon> AddCouponToUser(string code, Guid userId);
+        Task<bool> DeleteCoupon(Guid id);
     }
 }

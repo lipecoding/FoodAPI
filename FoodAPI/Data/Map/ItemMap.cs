@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodAPI.Data.Map
 {
-    public class OrderItensMap : IEntityTypeConfiguration<OrderItensModel>
+    public class ItemMap : IEntityTypeConfiguration<Item>
     {
-        public void Configure(EntityTypeBuilder<OrderItensModel> builder)
+        public void Configure(EntityTypeBuilder<Item> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.OrderId).IsRequired();

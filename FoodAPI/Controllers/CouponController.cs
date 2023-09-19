@@ -19,9 +19,9 @@ namespace FoodAPI.Controllers
         }
 
         [HttpPost("AddCoupon")]
-        public async Task<ActionResult<CouponModel>> AddCoupon(CouponModel coupon)
+        public async Task<ActionResult<Coupon>> AddCoupon(Coupon coupon)
         {
-            CouponModel couponm = await _couponRepo.AddCoupon(coupon);
+            Coupon couponm = await _couponRepo.AddCoupon(coupon);
 
             if (couponm.Error.IsNullOrEmpty())
                 return Ok(couponm);
@@ -29,58 +29,58 @@ namespace FoodAPI.Controllers
                 return BadRequest(couponm.Error);
         }
         [HttpPost("AddCouponToUser/{code}-{userid}")]
-        public async Task<ActionResult<CouponModel>> AddCouponToUser(string code, int userid)
+        public async Task<ActionResult<Coupon>> AddCouponToUser(string code, Guid userid)
         {
-            CouponModel coupon = await _couponRepo.AddCouponToUser(code, userid);
+            Coupon coupon = await _couponRepo.AddCouponToUser(code, userid);
 
             return Ok(coupon);
         }
         [HttpDelete("DeleteCoupon/{id}")]
-        public async Task<ActionResult<CouponModel>> DeleteCoupon(int id)
+        public async Task<ActionResult<Coupon>> DeleteCoupon(Guid id)
         {
             bool del = await _couponRepo.DeleteCoupon(id);
 
             return Ok(del);
         }
         [HttpGet("FindAllCoupon")]
-        public async Task<ActionResult<List<CouponModel>>> FindAllCoupon()
+        public async Task<ActionResult<List<Coupon>>> FindAllCoupon()
         {
-            List<CouponModel> coupons = await _couponRepo.FindAllCoupon();
+            List<Coupon> coupons = await _couponRepo.FindAllCoupon();
 
             return Ok(coupons);
         }
         [HttpGet("FindByCode/{code}")]
-        public async Task<ActionResult<CouponModel>> FindByCode(string code)
+        public async Task<ActionResult<Coupon>> FindByCode(string code)
         {
-            CouponModel coupon = await _couponRepo.FindByCode(code);
+            Coupon coupon = await _couponRepo.FindByCode(code);
 
             return Ok(coupon);
         }
         [HttpGet("FindByCompanyId/{id}")]
-        public async Task<ActionResult<List<CouponModel>>> FindByCompanyId(int companyid)
+        public async Task<ActionResult<List<Coupon>>> FindByCompanyId(Guid companyid)
         {
-            List<CouponModel> coupons = await _couponRepo.FindByCompanyId(companyid);
+            List<Coupon> coupons = await _couponRepo.FindByCompanyId(companyid);
 
             return Ok(coupons);
         }
         [HttpGet("FindById/{id}")]
-        public async Task<ActionResult<CouponModel>> FindById(int id)
+        public async Task<ActionResult<Coupon>> FindById(Guid id)
         {
-            CouponModel coupon = await _couponRepo.FindById(id);
+            Coupon coupon = await _couponRepo.FindById(id);
 
             return Ok(coupon);
         }
         [HttpGet("FindByUserId/{userid}")]
-        public async Task<ActionResult<List<CouponModel>>> FindByUserId(int userid)
+        public async Task<ActionResult<List<Coupon>>> FindByUserId(Guid userid)
         {
             var coupons = await _couponRepo.FindByUserId(userid);
 
             return Ok(coupons);
         }
         [HttpPut("UpdateCoupon")]
-        public async Task<ActionResult<CouponModel>> UpdateCoupon(CouponModel coupon, int id)
+        public async Task<ActionResult<Coupon>> UpdateCoupon(Coupon coupon, Guid id)
         {
-            CouponModel couponm = await _couponRepo.UpdateCoupon(coupon, id);
+            Coupon couponm = await _couponRepo.UpdateCoupon(coupon, id);
 
             return Ok(couponm);
         }

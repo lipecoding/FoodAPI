@@ -16,37 +16,37 @@ namespace FoodAPI.Controllers
         }
 
         [HttpPost("AddAdress")]
-        public async Task<ActionResult<AdressModel>> AddAdress(AdressModel adress)
+        public async Task<ActionResult<Adress>> AddAdress(Adress adress)
          {
-            AdressModel adressM = await _adressRepo.AddAdress(adress);
+            Adress adressM = await _adressRepo.AddAdress(adress);
 
             return Ok(adressM);
         }
         [HttpDelete("DeleteAdress/{id}")]
-        public async Task<ActionResult<bool>> DeleteAdress(int id)
+        public async Task<ActionResult<bool>> DeleteAdress(Guid id)
         {
             bool del = await _adressRepo.DeleteAdress(id);
 
             return Ok(del);
         }
         [HttpGet("FindAdressByid/{id}")]
-        public async Task<ActionResult<AdressModel>> FindAdressByid(int id)
+        public async Task<ActionResult<Adress>> FindAdressByid(Guid id)
         {
-            AdressModel adress = await _adressRepo.FindAdressByid(id);
+            Adress adress = await _adressRepo.FindAdressByid(id);
 
             return Ok(adress);
         }
         [HttpPut("UpdateAdress")]
-        public async Task<ActionResult<AdressModel>> UpdateAdress(AdressModel adress, int id)
+        public async Task<ActionResult<Adress>> UpdateAdress(Adress adress, Guid id)
         {
-            AdressModel adressM = await _adressRepo.UpdateAdress(adress, id);
+            Adress adressM = await _adressRepo.UpdateAdress(adress, id);
 
             return Ok(adressM);
         }
         [HttpGet("FindAdress/{userId}")]
-        public async Task<ActionResult<List<AdressModel>>> FindAdress(int userId)
+        public async Task<ActionResult<List<Adress>>> FindAdress(Guid userId)
         {
-            List<AdressModel> adress = await _adressRepo.FindAdress(userId);
+            List<Adress> adress = await _adressRepo.FindAdress(userId);
 
             return Ok(adress);
         }

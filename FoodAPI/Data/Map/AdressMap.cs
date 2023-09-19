@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodAPI.Data.Map
 {
-    public class AdressMap :IEntityTypeConfiguration<AdressModel>
+    public class AdressMap :IEntityTypeConfiguration<Adress>
     {
-        public void Configure(EntityTypeBuilder<AdressModel> builder)
+        public void Configure(EntityTypeBuilder<Adress> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Street).IsRequired().HasMaxLength(255);

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodAPI.Data.Map
 {
-    public class DelivererMap : IEntityTypeConfiguration<DelivererModel>
+    public class DelivererMap : IEntityTypeConfiguration<Deliverer>
     {
-        public void Configure(EntityTypeBuilder<DelivererModel> builder)
+        public void Configure(EntityTypeBuilder<Deliverer> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired().HasMaxLength(255);

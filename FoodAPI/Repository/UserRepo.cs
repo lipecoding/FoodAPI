@@ -15,7 +15,7 @@ namespace FoodAPI.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<UserModel> AddUser(UserModel user)
+        public async Task<User> AddUser(User user)
         {
             if (_dbContext.User.Where(x => x.Email == user.Email).Any())
             {
@@ -41,9 +41,9 @@ namespace FoodAPI.Repository
             return user;
         }
 
-        public async Task<bool> DeleteUser(int id)
+        public async Task<bool> DeleteUser(Guid id)
         {
-            UserModel user = await FindById(id);
+            User user = await FindById(id);
 
             _dbContext.User.Remove(user);
             await _dbContext.SaveChangesAsync();
@@ -51,14 +51,14 @@ namespace FoodAPI.Repository
             return true;
         }
 
-        public async Task<List<UserModel>> FindAllUsers()
+        public async Task<List<User>> FindAllUsers()
         {
             return await _dbContext.User.ToListAsync();
         }
 
-        public async Task<UserModel> FindByEmail(string email)
+        public async Task<User> FindByEmail(string email)
         {
-            UserModel user = await _dbContext.User.FirstOrDefaultAsync(x => x.Email == email);
+            User user = await _dbContext.User.FirstOrDefaultAsync(x => x.Email == email);
 
             if (user == null)
             {
@@ -67,9 +67,9 @@ namespace FoodAPI.Repository
             return user;
         }
 
-        public async Task<UserModel> FindById(int id)
+        public async Task<User> FindById(Guid id)
         {
-            UserModel user = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == id);
+            User user = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == id);
 
             if (user == null)
             {
@@ -81,7 +81,7 @@ namespace FoodAPI.Repository
 
         public async Task<bool> Login(string email, string password)
         {
-            UserModel user = await _dbContext.User.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
+            User user = await _dbContext.User.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
 
             if (user == null)
             {
@@ -90,9 +90,9 @@ namespace FoodAPI.Repository
             return true;
         }
 
-        public async Task<UserModel> UpdateUser(UserModel user, int id)
+        public async Task<User> UpdateUser(User user, Guid id)
         {
-            UserModel userM = await FindById(id);
+            User userM = await FindById(id);
 
             userM.Name = user.Name;
 

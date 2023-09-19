@@ -17,30 +17,30 @@ namespace FoodAPI.Controllers
         }
 
         [HttpGet("FindAllMotorcicle")]
-        public async Task<ActionResult<List<DelivererMotorcicleModel>>> FindAllMotorcicle() 
+        public async Task<ActionResult<List<DelivererMotorcicle>>> FindAllMotorcicle() 
         {
-            List<DelivererMotorcicleModel> delivererMotorcicle = await _repo.FindAllMotorcicle();
+            List<DelivererMotorcicle> delivererMotorcicle = await _repo.FindAllMotorcicle();
 
             return Ok(delivererMotorcicle);
         }
         [HttpGet("FindById/{id}")]
-        public async Task<ActionResult<DelivererMotorcicleModel>> FindById(int id)
+        public async Task<ActionResult<DelivererMotorcicle>> FindById(Guid id)
         {
-            DelivererMotorcicleModel delivererMotorcicle = await _repo.FindById(id);
+            DelivererMotorcicle delivererMotorcicle = await _repo.FindById(id);
 
             return Ok(delivererMotorcicle);
         }
         [HttpGet("FindByUserId/{delivererId}")]
-        public async Task<ActionResult<DelivererMotorcicleModel>> FindByUserId(int DelivererId)
+        public async Task<ActionResult<DelivererMotorcicle>> FindByUserId(Guid DelivererId)
         {
-            DelivererMotorcicleModel delivererMotorcicle = await _repo.FindByUserId(DelivererId);
+            DelivererMotorcicle delivererMotorcicle = await _repo.FindByUserId(DelivererId);
 
             return Ok(delivererMotorcicle);
         }
         [HttpPost("AddDelivererMotorcicle")]
-        public async Task<ActionResult<DelivererMotorcicleModel>> AddDelivererMotorcicle(DelivererMotorcicleModel model)
+        public async Task<ActionResult<DelivererMotorcicle>> AddDelivererMotorcicle(DelivererMotorcicle model)
         {
-            DelivererMotorcicleModel delivererMotorcicle = await _repo.AddDelivererMotorcicle(model);
+            DelivererMotorcicle delivererMotorcicle = await _repo.AddDelivererMotorcicle(model);
 
             if (delivererMotorcicle.Error.IsNullOrEmpty())
                 return Ok(delivererMotorcicle);
@@ -48,14 +48,14 @@ namespace FoodAPI.Controllers
                 return BadRequest(delivererMotorcicle.Error);
         }
         [HttpPut("UpdateDelivererMotorcicle/{id}")]
-        public async Task<ActionResult<DelivererMotorcicleModel>> UpdateDelivererMotorcicle(int id, DelivererMotorcicleModel model)
+        public async Task<ActionResult<DelivererMotorcicle>> UpdateDelivererMotorcicle(Guid id, DelivererMotorcicle model)
         {
-            DelivererMotorcicleModel delivererMotorcicle = await _repo.UpdateDelivererMotorcicle(id, model);
+            DelivererMotorcicle delivererMotorcicle = await _repo.UpdateDelivererMotorcicle(id, model);
 
             return Ok(delivererMotorcicle);
         }
         [HttpDelete("DeleteDelivererMotorcicle/{id}")]
-        public async Task<ActionResult<bool>> DeleteDelivererMotorcicle(int id)
+        public async Task<ActionResult<bool>> DeleteDelivererMotorcicle(Guid id)
         {
             bool del = await _repo.DeleteDelivererMotorcicle(id);
 

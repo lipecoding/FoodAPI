@@ -9,17 +9,17 @@ namespace FoodAPI.Data
     {
         public FoodApiDBContext(DbContextOptions<FoodApiDBContext> options) : base(options) { }
 
-        public DbSet<AdressModel> Adresses { get; set; }
-        public DbSet<CouponModel> Coupon { get; set; }
-        public DbSet<CouponUserRelModel> CouponUserRel { get; set; }
-        public DbSet<CouponCompanyRelModel> CouponCompanyRel { get; set; }
-        public DbSet<CompanyModel> Company { get; set; }
-        public DbSet<MenuModel> Menu { get; set; }
-        public DbSet<UserModel> User { get; set; }
-        public DbSet<DelivererModel> Deliverer { get; set; }
-        public DbSet<DelivererMotorcicleModel> DelivererMotorcicle{ get; set; }
-        public DbSet<OrderModel> Order { get; set; }
-        public DbSet<OrderItensModel> OrderItens { get; set; }
+        public DbSet<Adress> Adresses { get; set; }
+        public DbSet<Coupon> Coupon { get; set; }
+        public DbSet<CouponUserRel> CouponUserRel { get; set; }
+        public DbSet<CouponCompanyRel> CouponCompanyRel { get; set; }
+        public DbSet<Company> Company { get; set; }
+        public DbSet<Menu> Menu { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Deliverer> Deliverer { get; set; }
+        public DbSet<DelivererMotorcicle> DelivererMotorcicle{ get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<Item> OrderItens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,7 +33,7 @@ namespace FoodAPI.Data
             modelBuilder.ApplyConfiguration(new DelivererMap());
             modelBuilder.ApplyConfiguration(new DelivererMotorcicleMap());
             modelBuilder.ApplyConfiguration(new OrderMap());
-            modelBuilder.ApplyConfiguration(new OrderItensMap());
+            modelBuilder.ApplyConfiguration(new ItemMap());
 
             base.OnModelCreating(modelBuilder);
         }

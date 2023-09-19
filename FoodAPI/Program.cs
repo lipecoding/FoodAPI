@@ -21,7 +21,7 @@ namespace FoodAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddEntityFrameworkSqlServer()
+            builder.Services
                 .AddDbContext<FoodApiDBContext> (
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
                 );

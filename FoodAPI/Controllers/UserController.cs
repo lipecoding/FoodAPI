@@ -17,23 +17,23 @@ namespace FoodAPI.Controllers
         }
 
         [HttpGet("FindById/{id}")]
-        public async Task<ActionResult<UserModel>> FindById(int id)
+        public async Task<ActionResult<User>> FindById(Guid id)
         {
-            UserModel user = await _userRepo.FindById(id);
+            User user = await _userRepo.FindById(id);
 
             return Ok(user);
         }
         [HttpGet("FindByEmail/{email}")]
-        public async Task<ActionResult<UserModel>> FindByEmail(string email)
+        public async Task<ActionResult<User>> FindByEmail(string email)
         {
-            UserModel user = await _userRepo.FindByEmail(email);
+            User user = await _userRepo.FindByEmail(email);
 
             return Ok(user);
         }
         [HttpGet("FindAllUsers")]
-        public async Task<ActionResult<UserModel>> FindAllUsers()
+        public async Task<ActionResult<User>> FindAllUsers()
         {
-            List<UserModel> user = await _userRepo.FindAllUsers();
+            List<User> user = await _userRepo.FindAllUsers();
 
             return Ok(user);
         }
@@ -46,16 +46,16 @@ namespace FoodAPI.Controllers
             return Ok(login);
         }
         [HttpPut("UpdateUser/{id}")]
-        public async Task<ActionResult<UserModel>> UpdateUser(UserModel user, int id)
+        public async Task<ActionResult<User>> UpdateUser(User user, Guid id)
         {
-            UserModel userm = await _userRepo.UpdateUser(user, id);
+            User userm = await _userRepo.UpdateUser(user, id);
 
             return Ok(userm);
         }
         [HttpPost("AddUser")]
-        public async Task<ActionResult<UserModel>> AddUser(UserModel user)
+        public async Task<ActionResult<User>> AddUser(User user)
         {
-            UserModel userM = await _userRepo.AddUser(user);
+            User userM = await _userRepo.AddUser(user);
             if(userM.Error.IsNullOrEmpty())
                 return Ok(userM);
             else
@@ -63,7 +63,7 @@ namespace FoodAPI.Controllers
 
         }
         [HttpDelete("DeleteUser/{id}")]
-        public async Task<ActionResult<bool>> DeleteUser(int id)
+        public async Task<ActionResult<bool>> DeleteUser(Guid id)
         {
             bool del = await _userRepo.DeleteUser(id);
 

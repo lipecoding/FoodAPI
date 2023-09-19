@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodAPI.Data.Map
 {
-    public class CouponMap : IEntityTypeConfiguration<CouponModel>
+    public class CouponMap : IEntityTypeConfiguration<Coupon>
     {
-        public void Configure(EntityTypeBuilder<CouponModel> builder)
+        public void Configure(EntityTypeBuilder<Coupon> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).IsRequired().HasMaxLength(8);
@@ -15,7 +15,7 @@ namespace FoodAPI.Data.Map
             builder.Property(x => x.Categorie).IsRequired().HasMaxLength(8);
             builder.Property(x => x.Value).IsRequired();
             builder.Property(x => x.V_Type).IsRequired();
-            builder.Property(x => x.ItemID);
+            builder.Property(x => x.MenuID);
             builder.HasOne(x => x.Menu);
             builder.HasMany(x => x.UserRel).WithOne(x => x.Coupon);
             builder.HasMany(x => x.CompanyRel).WithOne(x => x.Coupon);

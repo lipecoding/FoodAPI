@@ -4,10 +4,10 @@ namespace FoodAPI.Repository.Interface
 {
     public interface IAdressRepo
     {
-        Task<List<AdressModel>> FindAdress(int userId);
-        Task<AdressModel> AddAdress(AdressModel adress);
-        Task<AdressModel> UpdateAdress(AdressModel adress, int id);
-        Task<bool> DeleteAdress(int adressId);
-        Task<AdressModel> FindAdressByid(int id);
+        Task<List<Adress>> FindAdress(Guid userId);
+        Task<Adress> AddAdress(Adress adress);
+        Task<Adress> UpdateAdress(Adress adress, Guid id);
+        Task<bool> DeleteAdress(Guid adressId);
+        Task<Adress> FindAdressByid(Guid id);
     }
 }

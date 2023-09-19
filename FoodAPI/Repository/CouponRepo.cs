@@ -14,7 +14,7 @@ namespace FoodAPI.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<CouponModel> AddCoupon(CouponModel coupon)
+        public async Task<Coupon> AddCoupon(Coupon coupon)
         {
             if (_dbContext.Coupon.Where(x => x.Code == coupon.Code).Any())
             {
@@ -28,10 +28,10 @@ namespace FoodAPI.Repository
             return coupon;
         }
         
-        public async Task<CouponModel> AddCouponToUser(string code, int userId)
+        public async Task<Coupon> AddCouponToUser(string code, Guid userId)
         {
-            CouponModel coupon = await FindByCode(code);
-            CouponUserRelModel couponUserRel = new();
+            Coupon coupon = await FindByCode(code);
+            CouponUserRel couponUserRel = new();
 
             couponUserRel.CouponId = coupon.Id;
             couponUserRel.UserId = userId;
@@ -42,21 +42,21 @@ namespace FoodAPI.Repository
             return coupon;
         }
 
-        public async Task<bool> DeleteCoupon(int id)
+        public async Task<bool> DeleteCoupon(Guid id)
         {
-            CouponModel coupon = await FindById(id);
+            Coupon coupon = await FindById(id);
             _dbContext.Coupon.Remove(coupon);
             return true;
         }
 
-        public async Task<List<CouponModel>> FindAllCoupon()
+        public async Task<List<Coupon>> FindAllCoupon()
         {
             return await _dbContext.Coupon.ToListAsync();
         }
 
-        public async Task<CouponModel> FindByCode(string code)
+        public async Task<Coupon> FindByCode(string code)
         {
-            CouponModel coupon = await _dbContext.Coupon.FirstOrDefaultAsync(x => x.Code == code);
+            Coupon coupon = await _dbContext.Coupon.FirstOrDefaultAsync(x => x.Code == code);
 
             if (coupon == null)
             {
@@ -65,7 +65,7 @@ namespace FoodAPI.Repository
             return coupon;
         }
 
-        public async Task<List<CouponModel>> FindByCompanyId(int companyId)
+        public async Task<List<Coupon>> FindByCompanyId(Guid companyId)
         {
             return await (from Coupon in _dbContext.Coupon 
                           join CompanyRel in _dbContext.CouponCompanyRel on Coupon.Id equals CompanyRel.CouponId 
@@ -73,9 +73,9 @@ namespace FoodAPI.Repository
                           select Coupon).ToListAsync();
         }
 
-        public async Task<CouponModel> FindById(int id)
+        public async Task<Coupon> FindById(Guid id)
         {
-            CouponModel coupon = await _dbContext.Coupon.FirstOrDefaultAsync(x => x.Id == id);
+            Coupon coupon = await _dbContext.Coupon.FirstOrDefaultAsync(x => x.Id == id);
 
             if (coupon == null)
             {
@@ -84,7 +84,7 @@ namespace FoodAPI.Repository
             return coupon;
         }
 
-        public async Task<List<CouponModel>> FindByUserId(int userId)
+        public async Task<List<Coupon>> FindByUserId(Guid userId)
         {
             return await (from Coupon in _dbContext.Coupon
                           join UserRel in _dbContext.CouponUserRel on Coupon.Id equals UserRel.CouponId
@@ -92,9 +92,9 @@ namespace FoodAPI.Repository
                           select Coupon).ToListAsync();
         }
 
-        public async Task<CouponModel> UpdateCoupon(CouponModel coupon, int id)
+        public async Task<Coupon> UpdateCoupon(Coupon coupon, Guid id)
         {
-            CouponModel couponM = await FindById(id);
+            Coupon couponM = await FindById(id);
 
             coupon.Id = id;
             if(_dbContext.Coupon.Where(x => x.Code == coupon.Code).Any())

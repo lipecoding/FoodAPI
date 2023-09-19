@@ -4,12 +4,12 @@ namespace FoodAPI.Repository.Interface
 {
     public interface IUserRepo
     {
-        Task<List<UserModel>> FindAllUsers();
-        Task<UserModel> FindById(int id);
-        Task<UserModel> FindByEmail(string email);
-        Task<UserModel> AddUser(UserModel user);
-        Task<UserModel> UpdateUser(UserModel user, int id);
-        Task<bool> DeleteUser(int id);
+        Task<List<User>> FindAllUsers();
+        Task<User> FindById(Guid id);
+        Task<User> FindByEmail(string email);
+        Task<User> AddUser(User user);
+        Task<User> UpdateUser(User user, Guid id);
+        Task<bool> DeleteUser(Guid id);
         Task<bool> Login(string email, string password);
     }
 }

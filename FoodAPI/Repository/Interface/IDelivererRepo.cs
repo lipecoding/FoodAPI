@@ -4,10 +4,10 @@ namespace FoodAPI.Repository.Interface
 {
     public interface IDelivererRepo
     {
-        Task<DelivererModel> FindById(int id);
-        Task<List<DelivererModel>> FindAll();
-        Task<DelivererModel> AddDeliverer(DelivererModel model);
-        Task<DelivererModel> UpdateDeliverer(int id, DelivererModel model);
-        Task<bool> DeleteDeliverer(int id); 
+        Task<Deliverer> FindById(Guid id);
+        Task<List<Deliverer>> FindAll();
+        Task<Deliverer> AddDeliverer(Deliverer model);
+        Task<Deliverer> UpdateDeliverer(Guid id, Deliverer model);
+        Task<bool> DeleteDeliverer(Guid id); 
     }
 }
