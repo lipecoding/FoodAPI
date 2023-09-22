@@ -2,7 +2,6 @@ using FoodAPI.Data;
 using FoodAPI.Repository;
 using FoodAPI.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
 
 namespace FoodAPI
 {
@@ -28,7 +27,7 @@ namespace FoodAPI
 
             builder.Services.AddScoped<IUserRepo, UserRepo>();
             builder.Services.AddScoped<ICompanyRepo, CompanyRepo>();
-            builder.Services.AddScoped<IAdressRepo, AdressRepo>();
+            builder.Services.AddScoped<IAddressRepo, AddressRepo>();
             builder.Services.AddScoped<ICouponRepo, CouponRepo>();
             builder.Services.AddScoped<IMenuRepo, MenuRepo>();
             builder.Services.AddScoped<IDelivererRepo, DelivererRepo>();

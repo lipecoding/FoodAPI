@@ -9,9 +9,14 @@ namespace FoodAPI.Model
     [Index(nameof(Code), Name = "Index_Coupon")]
     public class Coupon
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Coupon()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        [Key]
         [Column("c_id")]
-        public virtual Guid Id { get; set; }
+        public virtual Guid? Id { get; set; }
 
         [Column("c_code")]
         [Required]
@@ -35,7 +40,7 @@ namespace FoodAPI.Model
 
         [Column("c_value")]
         [Required]
-        public virtual double Value { get; set; }
+        public virtual Decimal Value { get; set; }
 
         [Column("c_value_type")]
         [Required]

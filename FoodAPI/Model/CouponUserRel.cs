@@ -10,9 +10,14 @@ namespace FoodAPI.Model
     [Index(nameof(UserId), Name = "Index_CouponUser")]
     public class CouponUserRel
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public CouponUserRel() 
+        { 
+            Id = Guid.NewGuid();
+        }
+
+        [Key]
         [Column("cu_id")]
-        public virtual Guid Id { get; set; }
+        public virtual Guid? Id { get; set; }
 
         [Column("cu_coupon_id")]
         [Required]
@@ -24,6 +29,6 @@ namespace FoodAPI.Model
         [Required]
         public virtual Guid UserId { get; set; }
         [JsonIgnore]
-        public virtual User User { get; set;}
+        public virtual User? User { get; set;}
     }
 }

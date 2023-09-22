@@ -7,9 +7,13 @@ namespace FoodAPI.Model
     [Table("ORDER_ITEM")]
     public class Item
     {
+        public Item()
+        {
+            Id = Guid.NewGuid();
+        }
         [Column("oi_id")]
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual Guid Id { get; set; }
+        [Key]
+        public virtual Guid? Id { get; set; }
 
         [Column("oi_menu_id")]
         [Required]
@@ -18,12 +22,11 @@ namespace FoodAPI.Model
 
         [Column("oi_amount")]
         [Required]
-        [MaxLength(2)]
         public virtual int Amount { get; set; }
 
         [Column("oi_value")]
         [Required]
-        public virtual double Value { get; set; }
+        public virtual Decimal Value { get; set; }
 
         [Column("oi_order_id")]
         [Required]

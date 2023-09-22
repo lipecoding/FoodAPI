@@ -9,9 +9,13 @@ namespace FoodAPI.Model
     [Index(nameof(UserId), Name = "Index_Order")]
     public class Order
     {
+        public Order()
+        {
+            Id = Guid.NewGuid();
+        }
         [Column("o_id")]
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual Guid Id { get; set; }
+        [Key]
+        public virtual Guid? Id { get; set; }
 
         [Column("o_user_id")]
         [Required]
@@ -33,14 +37,14 @@ namespace FoodAPI.Model
         public virtual Guid DelivererId { get; set; }
         public virtual Deliverer Deliverer { get; set; }
 
-        [Column("o_adress_id")]
+        [Column("o_address_id")]
         [Required]
-        public virtual Guid AdressId { get; set; }
-        public virtual Adress Adress { get; set; }
+        public virtual Guid AddressId { get; set; }
+        public virtual Address Address { get; set; }
 
         [Column("o_value")]
         [Required]
-        public virtual double Value { get; set; }
+        public virtual Decimal Value { get; set; }
 
         [Column("o_date")]
         [Required]

@@ -3,12 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodAPI.Model
 {
-    [Table("ADRESS")]
-    public class Adress
+    [Table("ADDRESS")]
+    public class Address
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Address()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        [Key]
         [Column("a_id")]
-        public virtual Guid Id { get; set; }
+        public virtual Guid? Id { get; set; }
 
         [Column("a_cep")]
         [Required]
@@ -20,13 +25,11 @@ namespace FoodAPI.Model
         [MaxLength(255)]
         public virtual String Street { get; set; }
 
-        [Column("a_adress_number")]
+        [Column("a_address_number")]
         [Required]
-        [MaxLength(6)]
-        public virtual int AdressNumber { get; set; }
+        public virtual int AddressNumber { get; set; }
 
         [Column("a_complement")]
-        [Required]
         [MaxLength(255)]
         public virtual String? Complement { get; set; }
 
@@ -38,6 +41,6 @@ namespace FoodAPI.Model
         [Column("a_user_id")]
         [Required]
         public virtual Guid UserId { get; set; }
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
     }
 }

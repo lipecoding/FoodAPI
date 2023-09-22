@@ -9,9 +9,14 @@ namespace FoodAPI.Model
     [Index(nameof(Email), nameof(PhoneNumber), Name = "Index_Deliverer")]
     public class Deliverer
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Deliverer()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        [Key]
         [Column("d_id")]
-        public virtual Guid Id { get; set; }
+        public virtual Guid? Id { get; set; }
 
         [Column("d_name")]
         [Required]
@@ -57,9 +62,9 @@ namespace FoodAPI.Model
         [MaxLength(255)]
         public virtual String Street { get; set; }
 
-        [Column("d_adressnumber")]
+        [Column("d_addressnumber")]
         [Required]
-        public virtual int AdressNumber { get; set; }
+        public virtual int AddressNumber { get; set; }
 
         [Column("d_complement")]
         [Required]

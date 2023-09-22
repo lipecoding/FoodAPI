@@ -9,9 +9,13 @@ namespace FoodAPI.Model
     [Index(nameof(CompanyId), Name = "Index_CouponCompany")]
     public class CouponCompanyRel
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public CouponCompanyRel()
+        {
+            Id = Guid.NewGuid();
+        }
+        [Key]
         [Column("cc_id")]
-        public virtual Guid Id { get; set; }
+        public virtual Guid? Id { get; set; }
         [Column("cc_coupon_id")]
         [Required]
         public virtual Guid CouponId { get; set; }
@@ -22,6 +26,6 @@ namespace FoodAPI.Model
         [Required]
         public virtual Guid CompanyId { get; set; }
         [JsonIgnore]
-        public virtual Company Company { get; set; }
+        public virtual Company? Company { get; set; }
     }
 }

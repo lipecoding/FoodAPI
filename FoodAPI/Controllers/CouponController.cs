@@ -29,9 +29,9 @@ namespace FoodAPI.Controllers
                 return BadRequest(couponm.Error);
         }
         [HttpPost("AddCouponToUser/{code}-{userid}")]
-        public async Task<ActionResult<Coupon>> AddCouponToUser(string code, Guid userid)
+        public async Task<ActionResult<CouponUserRel>> AddCouponToUser(Guid id, Guid userid)
         {
-            Coupon coupon = await _couponRepo.AddCouponToUser(code, userid);
+            CouponUserRel coupon = await _couponRepo.AddCouponToUser(id, userid);
 
             return Ok(coupon);
         }

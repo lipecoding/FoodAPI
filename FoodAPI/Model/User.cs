@@ -9,9 +9,14 @@ namespace FoodAPI.Model
     [Index(nameof(PhoneNumber), nameof(Email), Name = "Index_User")]
     public class User
     {
+        public User()
+        {
+            Id = Guid.NewGuid();
+        }
+
         [Column("u_id")]
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual Guid Id { get; set; }
+        [Key]
+        public virtual Guid? Id { get; set; }
 
         [Column("u_name")]
         [Required]

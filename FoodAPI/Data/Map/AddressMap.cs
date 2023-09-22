@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodAPI.Data.Map
 {
-    public class CompanyMap :IEntityTypeConfiguration<Company>
+    public class AddressMap :IEntityTypeConfiguration<Address>
     {
-        public void Configure(EntityTypeBuilder<Company> builder)
+        public void Configure(EntityTypeBuilder<Address> builder)
         {
-            builder.Ignore(x => x.Error);
+            builder.HasOne(x => x.User).WithMany();
         }
         
     }

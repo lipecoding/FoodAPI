@@ -9,7 +9,7 @@ namespace FoodAPI.Data
     {
         public FoodApiDBContext(DbContextOptions<FoodApiDBContext> options) : base(options) { }
 
-        public DbSet<Adress> Adresses { get; set; }
+        public DbSet<Address> Address { get; set; }
         public DbSet<Coupon> Coupon { get; set; }
         public DbSet<CouponUserRel> CouponUserRel { get; set; }
         public DbSet<CouponCompanyRel> CouponCompanyRel { get; set; }
@@ -23,7 +23,7 @@ namespace FoodAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new AdressMap());
+            modelBuilder.ApplyConfiguration(new AddressMap());
             modelBuilder.ApplyConfiguration(new CouponMap());
             modelBuilder.ApplyConfiguration(new CouponCompanyRelMap());
             modelBuilder.ApplyConfiguration(new CouponUserRelMap());

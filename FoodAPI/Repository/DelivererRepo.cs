@@ -78,7 +78,7 @@ namespace FoodAPI.Repository
 
             deliverer.Birthday = model.Birthday;
             deliverer.CEP = model.CEP;
-            deliverer.AdressNumber = model.AdressNumber;
+            deliverer.AddressNumber = model.AddressNumber;
             deliverer.Complement = model.Complement;
             deliverer.Street = model.Street;
 

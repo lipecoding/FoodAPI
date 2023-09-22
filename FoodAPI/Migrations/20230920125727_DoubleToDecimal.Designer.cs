@@ -4,6 +4,7 @@ using FoodAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodAPI.Migrations
 {
     [DbContext(typeof(FoodApiDBContext))]
-    partial class FoodApiDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230920125727_DoubleToDecimal")]
+    partial class DoubleToDecimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,16 +25,17 @@ namespace FoodAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FoodAPI.Model.Address", b =>
+            modelBuilder.Entity("FoodAPI.Model.Adress", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("a_id");
 
-                    b.Property<int>("AddressNumber")
+                    b.Property<int>("AdressNumber")
+                        .HasMaxLength(6)
                         .HasColumnType("int")
-                        .HasColumnName("a_address_number");
+                        .HasColumnName("a_adress_number");
 
                     b.Property<string>("CEP")
                         .IsRequired()
@@ -40,6 +44,7 @@ namespace FoodAPI.Migrations
                         .HasColumnName("a_cep");
 
                     b.Property<string>("Complement")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("a_complement");
@@ -62,14 +67,15 @@ namespace FoodAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
-                    b.ToTable("ADDRESS");
+                    b.ToTable("ADRESS");
                 });
 
             modelBuilder.Entity("FoodAPI.Model.Company", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("cy_id");
@@ -121,25 +127,26 @@ namespace FoodAPI.Migrations
 
             modelBuilder.Entity("FoodAPI.Model.Coupon", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("c_id");
 
                     b.Property<int>("Categorie")
+                        .HasMaxLength(8)
                         .HasColumnType("int")
                         .HasColumnName("c_categorie");
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)")
                         .HasColumnName("c_code");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)")
                         .HasColumnName("c_description");
 
                     b.Property<Guid?>("MenuID")
@@ -176,7 +183,7 @@ namespace FoodAPI.Migrations
 
             modelBuilder.Entity("FoodAPI.Model.CouponCompanyRel", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("cc_id");
@@ -203,7 +210,7 @@ namespace FoodAPI.Migrations
 
             modelBuilder.Entity("FoodAPI.Model.CouponUserRel", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("cu_id");
@@ -230,14 +237,15 @@ namespace FoodAPI.Migrations
 
             modelBuilder.Entity("FoodAPI.Model.Deliverer", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("d_id");
 
-                    b.Property<int>("AddressNumber")
+                    b.Property<int>("AdressNumber")
+                        .HasMaxLength(6)
                         .HasColumnType("int")
-                        .HasColumnName("d_addressnumber");
+                        .HasColumnName("d_adressnumber");
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2")
@@ -285,8 +293,8 @@ namespace FoodAPI.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("d_password");
 
                     b.Property<string>("PhoneNumber")
@@ -296,6 +304,7 @@ namespace FoodAPI.Migrations
                         .HasColumnName("d_phonenumber");
 
                     b.Property<int>("Status")
+                        .HasMaxLength(1)
                         .HasColumnType("int")
                         .HasColumnName("d_status");
 
@@ -314,15 +323,15 @@ namespace FoodAPI.Migrations
 
             modelBuilder.Entity("FoodAPI.Model.DelivererMotorcicle", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("dm_id");
 
                     b.Property<string>("Brand")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)")
                         .HasColumnName("dm_brand");
 
                     b.Property<Guid>("DelivererId")
@@ -331,8 +340,8 @@ namespace FoodAPI.Migrations
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
                         .HasColumnName("dm_model");
 
                     b.Property<string>("Plate")
@@ -348,6 +357,7 @@ namespace FoodAPI.Migrations
                         .HasColumnName("dm_renavam");
 
                     b.Property<int>("Year")
+                        .HasMaxLength(4)
                         .HasColumnType("int")
                         .HasColumnName("dm_year");
 
@@ -363,12 +373,13 @@ namespace FoodAPI.Migrations
 
             modelBuilder.Entity("FoodAPI.Model.Item", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("oi_id");
 
                     b.Property<int>("Amount")
+                        .HasMaxLength(2)
                         .HasColumnType("int")
                         .HasColumnName("oi_amount");
 
@@ -395,7 +406,7 @@ namespace FoodAPI.Migrations
 
             modelBuilder.Entity("FoodAPI.Model.Menu", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("m_id");
@@ -449,14 +460,14 @@ namespace FoodAPI.Migrations
 
             modelBuilder.Entity("FoodAPI.Model.Order", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("o_id");
 
-                    b.Property<Guid>("AddressId")
+                    b.Property<Guid>("AdressId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("o_address_id");
+                        .HasColumnName("o_adress_id");
 
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uniqueidentifier")
@@ -488,7 +499,7 @@ namespace FoodAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AdressId");
 
                     b.HasIndex("CompanyId");
 
@@ -503,7 +514,7 @@ namespace FoodAPI.Migrations
 
             modelBuilder.Entity("FoodAPI.Model.User", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("u_id");
@@ -532,8 +543,8 @@ namespace FoodAPI.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
                         .HasColumnName("u_password");
 
                     b.Property<string>("PhoneNumber")
@@ -553,11 +564,11 @@ namespace FoodAPI.Migrations
                     b.ToTable("USER");
                 });
 
-            modelBuilder.Entity("FoodAPI.Model.Address", b =>
+            modelBuilder.Entity("FoodAPI.Model.Adress", b =>
                 {
                     b.HasOne("FoodAPI.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .WithOne()
+                        .HasForeignKey("FoodAPI.Model.Adress", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -656,9 +667,9 @@ namespace FoodAPI.Migrations
 
             modelBuilder.Entity("FoodAPI.Model.Order", b =>
                 {
-                    b.HasOne("FoodAPI.Model.Address", "Address")
+                    b.HasOne("FoodAPI.Model.Adress", "Adress")
                         .WithMany()
-                        .HasForeignKey("AddressId")
+                        .HasForeignKey("AdressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -686,7 +697,7 @@ namespace FoodAPI.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Address");
+                    b.Navigation("Adress");
 
                     b.Navigation("Company");
 

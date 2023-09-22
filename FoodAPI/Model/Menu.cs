@@ -6,9 +6,13 @@ namespace FoodAPI.Model
     [Table("MENU")]
     public class Menu
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Menu()
+        {
+            Id = Guid.NewGuid();
+        }
+        [Key]
         [Column("m_id")]
-        public virtual Guid Id { get; set; }
+        public virtual Guid? Id { get; set; }
 
         [Column("m_name")]
         [Required]
@@ -27,11 +31,11 @@ namespace FoodAPI.Model
 
         [Column("m_price")]
         [Required]
-        public virtual double Price { get; set; }
+        public virtual Decimal Price { get; set; }
 
         [Column("m_discount")]
         [Required]
-        public virtual double Discount { get; set; }
+        public virtual Decimal Discount { get; set; }
 
         [Column("m_image")]
         [Required]

@@ -12,7 +12,7 @@ namespace FoodAPI.Repository.Interface
         Task<Coupon> FindByCode(string code);
         Task<Coupon> AddCoupon(Coupon coupon);
         Task<Coupon> UpdateCoupon(Coupon coupon, Guid id);
-        Task<Coupon> AddCouponToUser(string code, Guid userId);
+        Task<CouponUserRel> AddCouponToUser(Guid id, Guid userId);
         Task<bool> DeleteCoupon(Guid id);
     }
 }

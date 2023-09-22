@@ -28,18 +28,17 @@ namespace FoodAPI.Repository
             return coupon;
         }
         
-        public async Task<Coupon> AddCouponToUser(string code, Guid userId)
+        public async Task<CouponUserRel> AddCouponToUser(Guid id, Guid userId)
         {
-            Coupon coupon = await FindByCode(code);
             CouponUserRel couponUserRel = new();
 
-            couponUserRel.CouponId = coupon.Id;
+            couponUserRel.CouponId = id;
             couponUserRel.UserId = userId;
 
             await _dbContext.CouponUserRel.AddAsync(couponUserRel);
             await _dbContext.SaveChangesAsync();
 
-            return coupon;
+            return couponUserRel;
         }
 
         public async Task<bool> DeleteCoupon(Guid id)

@@ -8,10 +8,6 @@ namespace FoodAPI.Data.Map
     {
         public void Configure(EntityTypeBuilder<Item> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.OrderId).IsRequired();
-            builder.Property(x => x.Amount).IsRequired();
-            builder.Property(x => x.MenuId).IsRequired();
             builder.HasOne(x => x.Menu);
             builder.HasOne(x => x.Order).WithMany(x => x.Itens).OnDelete(DeleteBehavior.NoAction);
         }

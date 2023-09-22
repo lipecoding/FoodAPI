@@ -9,9 +9,14 @@ namespace FoodAPI.Model
     [Index(nameof(DelivererId), nameof(Renavam), nameof(Plate), Name = "Index_Motorcicle")]
     public class DelivererMotorcicle
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DelivererMotorcicle()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        [Key]
         [Column("dm_id")]
-        public virtual Guid Id { get; set; }
+        public virtual Guid? Id { get; set; }
 
         [Column("dm_plate")]
         [Required]
@@ -30,7 +35,6 @@ namespace FoodAPI.Model
 
         [Column("dm_year")]
         [Required]
-        [MaxLength(4)]
         public virtual int Year { get; set; }
 
         [Column("dm_brand")]
