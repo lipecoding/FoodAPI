@@ -1,5 +1,4 @@
-﻿using FoodAPI.Enum;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -71,13 +70,15 @@ namespace FoodAPI.Model
         [MaxLength(255)]
         public virtual String? Complement { get; set; }
 
-        [Column("d_status")]
+        [Column("d_status_id")]
         [Required]
-        public virtual DelivererEnum Status { get; set; }
+        public virtual Guid StatusId { get; set; }
+        public virtual DelivererStatus Status { get; set; }
 
-        [Column("d_vehicle")]
+        [Column("d_vehicle_id")]
         [Required]
-        public virtual DelivererVehicleEnum DelivererVehicle { get; set; }
+        public virtual Guid VehicleId { get; set; }
+        public virtual DelivererVehicle Vehicle { get; set; }
         public virtual String? Error { get; set; }
 
     }

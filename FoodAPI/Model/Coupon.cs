@@ -1,5 +1,4 @@
-﻿using FoodAPI.ENUM;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -42,17 +41,20 @@ namespace FoodAPI.Model
         [Required]
         public virtual Decimal Value { get; set; }
 
-        [Column("c_value_type")]
+        [Column("c_value_type_id")]
         [Required]
-        public virtual VTypeEnum V_Type { get; set; }
+        public virtual Guid ValueTypeId { get; set; }
+        public virtual CouponValueType ValueType { get; set; }
 
-        [Column("c_categorie")]
+        [Column("c_company_type_id")]
         [Required]
-        public virtual CompanyTypeEnum Categorie { get; set; }
+        public virtual Guid CompanyTypeId { get; set; }
+        public virtual CompanyType CompanyType { get; set; }
 
-        [Column("c_premium")]
+        [Column("c_plan_id")]
         [Required]
-        public virtual PremiumEnum Premium { get; set; }
+        public virtual Guid PlanId { get; set; }
+        public virtual UserPlan Plan { get; set; }
 
         public virtual List<CouponUserRel>? UserRel { get; set; }
         public virtual List<CouponCompanyRel> CompanyRel { get; set; }

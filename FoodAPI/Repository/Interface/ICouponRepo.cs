@@ -1,5 +1,4 @@
-﻿using FoodAPI.ENUM;
-using FoodAPI.Model;
+﻿using FoodAPI.Model;
 
 namespace FoodAPI.Repository.Interface
 {

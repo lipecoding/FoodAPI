@@ -11,6 +11,7 @@ namespace FoodAPI.Data.Map
             builder.HasOne(x => x.Menu);
             builder.HasMany(x => x.UserRel).WithOne(x => x.Coupon);
             builder.HasMany(x => x.CompanyRel).WithOne(x => x.Coupon);
+            builder.HasOne(x => x.CompanyType).WithOne().OnDelete(DeleteBehavior.NoAction);
 
             builder.Ignore(x => x.Error);
         }

@@ -114,7 +114,7 @@ namespace FoodAPI.Repository
             else
                 userM.PhoneNumber = user.PhoneNumber;
 
-            userM.Premium = user.Premium;
+            userM.PlanId = user.PlanId;
 
             _dbContext.Update(userM);
             await _dbContext.SaveChangesAsync();

@@ -1,10 +1,8 @@
 ﻿using FoodAPI.Data;
-using FoodAPI.Enum;
 using FoodAPI.Model;
 using FoodAPI.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel.Design;
 
 namespace FoodAPI.Repository
 {
@@ -98,10 +96,10 @@ namespace FoodAPI.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<Order> UpdateOrderStatus(Guid id, OrderStatusEnum status)
+        public async Task<Order> UpdateOrderStatus(Guid id, Guid status)
         {
             Order order = await GetOrder(id);
-            order.Status = status;
+            order.StatusId = status;
             _dbContext.Order.Update(order);
             await _dbContext.SaveChangesAsync();
 

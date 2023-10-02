@@ -1,5 +1,4 @@
-﻿using FoodAPI.ENUM;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -42,13 +41,15 @@ namespace FoodAPI.Model
         [MaxLength(14)]
         public virtual String CNPJ { get; set; }
 
-        [Column("cy_type")]
+        [Column("cy_type_id")]
         [Required]
-        public CompanyTypeEnum Type { get; set; }
+        public virtual Guid TypeId { get; set; }
+        public virtual CompanyType Type { get; set; }
 
-        [Column("cy_plan")]
+        [Column("cy_plan_id")]
         [Required]
-        public CompanyPlanEnum Plan { get; set; }
+        public virtual Guid PlanId { get; set; }
+        public virtual CompanyPlan Plan { get; set; }
         public virtual String? Error { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using FoodAPI.ENUM;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -47,9 +46,10 @@ namespace FoodAPI.Model
         [MaxLength(11)]
         public virtual String CPF { get; set; }
 
-        [Column("u_premium")]
+        [Column("u_plan_id")]
         [Required]
-        public virtual PremiumEnum Premium { get; set; }
+        public virtual Guid PlanId { get; set; }
+        public virtual UserPlan Plan { get; set; }
         public virtual String? Error { get; set; }
     }
 }

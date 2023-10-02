@@ -1,5 +1,4 @@
-﻿using FoodAPI.Enum;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -52,9 +51,10 @@ namespace FoodAPI.Model
 
         public virtual List<Item> Itens { get; set; }
 
-        [Column("o_status")]
+        [Column("o_status_id")]
         [Required]
-        public OrderStatusEnum Status { get; set; }
+        public virtual Guid StatusId { get; set; }
+        public virtual OrderStatus Status { get; set; }
         public virtual String? Error { get; set; }
     }
 }

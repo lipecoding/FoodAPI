@@ -1,5 +1,4 @@
-﻿using FoodAPI.Enum;
-using FoodAPI.Model;
+﻿using FoodAPI.Model;
 
 namespace FoodAPI.Repository.Interface
 {
@@ -11,7 +10,7 @@ namespace FoodAPI.Repository.Interface
         public Task<List<Order>> GetOrdersByCouponId(Guid couponId);
         public Task<List<Order>> GetOrdersByDelivererId(Guid delivererId);
         public Task<List<Order>> GetOrdersByMenuId(Guid menuId);
-        public Task<Order> UpdateOrderStatus(Guid id, OrderStatusEnum status);
+        public Task<Order> UpdateOrderStatus(Guid id, Guid status);
         public Task<Order> AddOrder(Order order);
         public Task<Order> UpdateOrder(Order order, Guid id);
         public Task<bool> DeleteOrder(Guid id);

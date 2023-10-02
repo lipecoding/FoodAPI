@@ -1,5 +1,4 @@
-﻿using FoodAPI.Enum;
-using FoodAPI.Model;
+﻿using FoodAPI.Model;
 using FoodAPI.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -65,14 +64,14 @@ namespace FoodAPI.Controllers
             return Ok(orderM);
         }
         [HttpPut("UpdateOrderStatus/{id}")]
-        public async Task<ActionResult<Order>> UpdateOrderStatus(Guid id, OrderStatusEnum status)
+        public async Task<ActionResult<Order>> UpdateOrderStatus(Guid id, Guid status)
         {
             Order orderM = await _orderRepo.UpdateOrderStatus(id, status);
 
             return Ok(orderM);
         }
         [HttpDelete("DeleteOrder/{id}")]
-        public async Task<ActionResult<bool>> DeleteOrder(Guid id, OrderStatusEnum status)
+        public async Task<ActionResult<bool>> DeleteOrder(Guid id)
         {
             bool del = await _orderRepo.DeleteOrder(id);
 

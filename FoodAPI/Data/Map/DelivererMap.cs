@@ -8,6 +8,8 @@ namespace FoodAPI.Data.Map
     {
         public void Configure(EntityTypeBuilder<Deliverer> builder)
         {
+            builder.HasOne(x => x.Status).WithMany();
+            builder.HasOne(x => x.Vehicle).WithMany();
             builder.Ignore(x => x.Error);
         }
     }
